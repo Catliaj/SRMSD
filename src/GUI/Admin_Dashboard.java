@@ -17,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Admin_Dashboard extends JFrame {
 
@@ -80,11 +82,6 @@ public class Admin_Dashboard extends JFrame {
 		panel_3.setBackground(new Color(142, 60, 71));
 		panel_3.setLayout(null);
 		
-		JLabel lblNewLabel_3_1 = new JLabel("");
-		lblNewLabel_3_1.setBounds(-35, 373, 280, 339);
-		panel_3.add(lblNewLabel_3_1);
-		lblNewLabel_3_1.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/design1.png")));
-		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/admin.png")));
 		lblNewLabel_1.setBounds(87, 33, 83, 81);
@@ -133,8 +130,19 @@ public class Admin_Dashboard extends JFrame {
 		btnNewButton_1_1_1.setForeground(new Color(232, 216, 196));
 		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnNewButton_1_1_1.setBackground(new Color(109, 41, 50));
-		btnNewButton_1_1_1.setBounds(0, 533, 243, 63);
+		btnNewButton_1_1_1.setBounds(0, 587, 243, 63);
 		panel_3.add(btnNewButton_1_1_1);
+		
+		JButton btnNewButton_1_1_2 = new JButton("TRANSACTIONS");
+		btnNewButton_1_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1_1_2.setForeground(new Color(232, 216, 196));
+		btnNewButton_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnNewButton_1_1_2.setBackground(new Color(109, 41, 50));
+		btnNewButton_1_1_2.setBounds(0, 473, 243, 63);
+		panel_3.add(btnNewButton_1_1_2);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
