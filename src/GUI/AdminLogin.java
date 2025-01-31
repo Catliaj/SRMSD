@@ -11,11 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import models.loginAuth;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.Font;
-
-import models.loginAuth;
 
 public class AdminLogin extends JFrame implements ActionListener{
 
@@ -60,7 +61,7 @@ public class AdminLogin extends JFrame implements ActionListener{
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setIcon(new ImageIcon(LoginMenu.class.getResource("/Resources/AdminLogin_Background.png")));
+		lblNewLabel.setIcon(new ImageIcon(LoginMenu.class.getResource("/Resources/Adminlogin.png")));
 		lblNewLabel.setBounds(0, 0, 685, 490);
 		contentPane.add(lblNewLabel);
 		
@@ -75,13 +76,13 @@ public class AdminLogin extends JFrame implements ActionListener{
 		usernameField = new JTextField();
 		usernameField.setFont(new Font("Tahoma", Font.BOLD, 10));
 		usernameField.setBackground(new Color(232, 216, 196));
-		usernameField.setBounds(259, 182, 171, 24);
+		usernameField.setBounds(273, 202, 171, 24);
 		panel.add(usernameField);
 		usernameField.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBackground(new Color(232, 216, 196));
-		passwordField.setBounds(259, 237, 171, 25);
+		passwordField.setBounds(273, 249, 171, 25);
 		panel.add(passwordField);
 		
 		
@@ -89,7 +90,7 @@ public class AdminLogin extends JFrame implements ActionListener{
 		btnReset.setBackground(new Color(86, 28, 36));
 		btnReset.setForeground(new Color(255, 255, 255));
 		btnReset.addActionListener(this);
-		btnReset.setBounds(287, 269, 117, 20);
+		btnReset.setBounds(283, 284, 117, 20);
 		panel.add(btnReset);
 		
 		
@@ -97,15 +98,33 @@ public class AdminLogin extends JFrame implements ActionListener{
 		btnLogin.setBackground(new Color(86, 28, 36));
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.addActionListener(this);
-		btnLogin.setBounds(287, 294, 117, 20);
+		btnLogin.setBounds(283, 309, 117, 20);
 		panel.add(btnLogin);
 		
 	    btnBack = new JButton("BACK");
 		btnBack.addActionListener(this);
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setBackground(new Color(86, 28, 36));
-		btnBack.setBounds(287, 319, 117, 20);
+		btnBack.setBounds(283, 334, 117, 20);
 		panel.add(btnBack);
+		
+		JLabel adminloginlbl = new JLabel("ADMIN LOGIN");
+		adminloginlbl.setForeground(new Color(62, 19, 28));
+		adminloginlbl.setFont(new Font("Tahoma", Font.BOLD, 23));
+		adminloginlbl.setBounds(273, 147, 179, 26);
+		panel.add(adminloginlbl);
+		
+		JLabel lblNewLabel_1 = new JLabel("USERNAME");
+		lblNewLabel_1.setForeground(new Color(232, 216, 196));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 10));
+		lblNewLabel_1.setBounds(273, 189, 77, 13);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("PASSWORD");
+		lblNewLabel_1_1.setForeground(new Color(232, 216, 196));
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 10));
+		lblNewLabel_1_1.setBounds(273, 236, 77, 13);
+		panel.add(lblNewLabel_1_1);
 		
 		
 		
@@ -131,6 +150,7 @@ public class AdminLogin extends JFrame implements ActionListener{
 			if(authentication.loginSuccess())
 			{
 				dispose();
+				new Admin_Dashboard();
 			}
 			else
 			{

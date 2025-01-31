@@ -17,8 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 import models.loginAuth;
 
-public class UserLogin extends JFrame implements ActionListener
-{
+public class UserLogin extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -27,7 +26,6 @@ public class UserLogin extends JFrame implements ActionListener
 	private JButton btnReset;
 	private JButton btnLogin;
 	private JButton btnBack;
-
 	/**
 	 * Launch the application.
 	 */
@@ -62,7 +60,7 @@ public class UserLogin extends JFrame implements ActionListener
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(LoginMenu.class.getResource("/Resources/UserLogin_Background.png")));
+		lblNewLabel.setIcon(new ImageIcon(LoginMenu.class.getResource("/Resources/Userlogin.png")));
 		lblNewLabel.setBounds(0, 0, 685, 490);
 		contentPane.add(lblNewLabel);
 		
@@ -77,13 +75,13 @@ public class UserLogin extends JFrame implements ActionListener
 		usernameField = new JTextField();
 		usernameField.setFont(new Font("Tahoma", Font.BOLD, 10));
 		usernameField.setBackground(new Color(232, 216, 196));
-		usernameField.setBounds(259, 182, 171, 24);
+		usernameField.setBounds(272, 188, 171, 24);
 		panel.add(usernameField);
 		usernameField.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBackground(new Color(232, 216, 196));
-		passwordField.setBounds(259, 237, 171, 25);
+		passwordField.setBounds(272, 234, 171, 25);
 		panel.add(passwordField);
 		
 	    btnReset = new JButton("RESET");
@@ -107,6 +105,25 @@ public class UserLogin extends JFrame implements ActionListener
 		btnBack.setBackground(new Color(86, 28, 36));
 		btnBack.setBounds(287, 319, 117, 20);
 		panel.add(btnBack);
+		
+		
+		JLabel lblNewLabel_1 = new JLabel("USERNAME");
+		lblNewLabel_1.setForeground(new Color(232, 216, 196));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 10));
+		lblNewLabel_1.setBounds(272, 175, 94, 13);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("PASSWORD");
+		lblNewLabel_1_1.setForeground(new Color(232, 216, 196));
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 10));
+		lblNewLabel_1_1.setBounds(272, 222, 94, 13);
+		panel.add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("USER LOGIN");
+		lblNewLabel_1_2.setForeground(new Color(62, 19, 28));
+		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 23));
+		lblNewLabel_1_2.setBounds(282, 138, 147, 24);
+		panel.add(lblNewLabel_1_2);
 	}
 
 	@Override
