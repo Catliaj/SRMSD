@@ -20,7 +20,8 @@ import javax.swing.border.MatteBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Admin_Dashboard extends JFrame {
+public class Admin_Dashboard extends JFrame implements ActionListener 
+{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -28,6 +29,11 @@ public class Admin_Dashboard extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JButton dashboardBtn;
+	private JButton btnProducts;
+	private JButton RegisterBtn;
+	private JButton logoutBtn;
+	private JButton transactionsBtn;
 
 	/**
 	 * Launch the application.
@@ -105,44 +111,46 @@ public class Admin_Dashboard extends JFrame {
 		lblNewLabel_2_1_1.setBounds(10, 160, 211, 32);
 		panel_3.add(lblNewLabel_2_1_1);
 		
-		JButton btnNewButton = new JButton("DASHBOARD");
-		btnNewButton.setBackground(new Color(109, 41, 50));
-		btnNewButton.setForeground(new Color(232, 216, 196));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton.setBounds(0, 254, 243, 63);
-		panel_3.add(btnNewButton);
+	    dashboardBtn = new JButton("DASHBOARD");
+	    dashboardBtn.setEnabled(false);
+		dashboardBtn.setBackground(new Color(109, 41, 50));
+		dashboardBtn.setForeground(new Color(232, 216, 196));
+		dashboardBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		dashboardBtn.setBounds(0, 254, 243, 63);
+		dashboardBtn.addActionListener(this);
+		panel_3.add(dashboardBtn);
 		
-		JButton btnProducts = new JButton("PRODUCTS");
+	    btnProducts = new JButton("PRODUCTS");
 		btnProducts.setForeground(new Color(232, 216, 196));
 		btnProducts.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnProducts.setBackground(new Color(109, 41, 50));
 		btnProducts.setBounds(0, 327, 243, 63);
+		btnProducts.addActionListener(this);
 		panel_3.add(btnProducts);
 		
-		JButton btnNewButton_1_1 = new JButton("REGISTER");
-		btnNewButton_1_1.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_1_1.setBackground(new Color(109, 41, 50));
-		btnNewButton_1_1.setBounds(0, 400, 243, 63);
-		panel_3.add(btnNewButton_1_1);
+	    RegisterBtn = new JButton("REGISTER");
+		RegisterBtn.setForeground(new Color(232, 216, 196));
+		RegisterBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		RegisterBtn.setBackground(new Color(109, 41, 50));
+		RegisterBtn.setBounds(0, 400, 243, 63);
+		RegisterBtn.addActionListener(this);
+		panel_3.add(RegisterBtn);
 		
-		JButton btnNewButton_1_1_1 = new JButton("LOG OUT");
-		btnNewButton_1_1_1.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_1_1_1.setBackground(new Color(109, 41, 50));
-		btnNewButton_1_1_1.setBounds(0, 587, 243, 63);
-		panel_3.add(btnNewButton_1_1_1);
+	    logoutBtn = new JButton("LOG OUT");
+		logoutBtn.setForeground(new Color(232, 216, 196));
+		logoutBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		logoutBtn.setBackground(new Color(109, 41, 50));
+		logoutBtn.setBounds(0, 587, 243, 63);
+		logoutBtn.addActionListener(this);
+		panel_3.add(logoutBtn);
 		
-		JButton btnNewButton_1_1_2 = new JButton("TRANSACTIONS");
-		btnNewButton_1_1_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1_1_2.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_1_1_2.setBackground(new Color(109, 41, 50));
-		btnNewButton_1_1_2.setBounds(0, 473, 243, 63);
-		panel_3.add(btnNewButton_1_1_2);
+	    transactionsBtn = new JButton("TRANSACTIONS");
+		transactionsBtn.addActionListener(this);
+		transactionsBtn.setForeground(new Color(232, 216, 196));
+		transactionsBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		transactionsBtn.setBackground(new Color(109, 41, 50));
+		transactionsBtn.setBounds(0, 473, 243, 63);
+		panel_3.add(transactionsBtn);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
@@ -300,5 +308,29 @@ public class Admin_Dashboard extends JFrame {
 		
 		setLocationRelativeTo(null);
 		setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == btnProducts)
+		{
+			dispose();
+			new Admin_Products();
+		}
+		else if(e.getSource() == transactionsBtn)
+		{
+			dispose();
+			new Admin_Transactions();
+		}
+		else if(e.getSource() == RegisterBtn)
+		{
+			dispose();
+		}
+		else if(e.getSource() == logoutBtn)
+		{
+			dispose();
+			new AdminLogin();
+		}
 	}
 }

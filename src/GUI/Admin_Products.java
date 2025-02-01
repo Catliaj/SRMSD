@@ -13,6 +13,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTextField;
@@ -23,20 +26,31 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultComboBoxModel;
+import models.product;
 
-public class Admin_Products extends JFrame {
+public class Admin_Products extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private final JPanel panel_3 = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_5;
+	private JTextField product_id;
+	private JTextField category;
+	private JTextField brand;
+	private JTextField product_name;
+	private JTextField price;
 	private JTable table;
-	private JTextField textField_4;
-
+	private JTextField search;
+	private JTextField stock_quantity;
+	private JButton AddBtn;
+	private JButton UpdateBtn;
+	private JButton ClearBtn;
+	private JButton DeleteBtn;
+	private JButton DashboardBtn;
+	private JButton btnProducts;
+	private JButton registerBtn;
+	private JButton LogoutBtn;
+	private JButton transactionBtn;
 	/**
 	 * Launch the application.
 	 */
@@ -90,11 +104,6 @@ public class Admin_Products extends JFrame {
 		panel_3.setBackground(new Color(142, 60, 71));
 		panel_3.setLayout(null);
 		
-		JLabel lblNewLabel_3_1 = new JLabel("");
-		lblNewLabel_3_1.setBounds(-35, 373, 280, 339);
-		panel_3.add(lblNewLabel_3_1);
-		lblNewLabel_3_1.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/design1.png")));
-		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/admin.png")));
 		lblNewLabel_1.setBounds(87, 33, 83, 81);
@@ -118,33 +127,50 @@ public class Admin_Products extends JFrame {
 		lblNewLabel_2_1_1.setBounds(10, 160, 211, 32);
 		panel_3.add(lblNewLabel_2_1_1);
 		
-		JButton btnNewButton = new JButton("DASHBOARD");
-		btnNewButton.setBackground(new Color(109, 41, 50));
-		btnNewButton.setForeground(new Color(232, 216, 196));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton.setBounds(0, 254, 243, 63);
-		panel_3.add(btnNewButton);
+	    DashboardBtn = new JButton("DASHBOARD");
+		DashboardBtn.setBackground(new Color(109, 41, 50));
+		DashboardBtn.setForeground(new Color(232, 216, 196));
+		DashboardBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		DashboardBtn.setBounds(0, 254, 243, 63);
+		DashboardBtn.addActionListener(this);
+		panel_3.add(DashboardBtn);
 		
-		JButton btnProducts = new JButton("PRODUCTS");
+	    btnProducts = new JButton("PRODUCTS");
+	    btnProducts.setEnabled(false);
 		btnProducts.setForeground(new Color(232, 216, 196));
 		btnProducts.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnProducts.setBackground(new Color(109, 41, 50));
 		btnProducts.setBounds(0, 327, 243, 63);
+		btnProducts.addActionListener(this);
 		panel_3.add(btnProducts);
 		
-		JButton btnNewButton_1_1 = new JButton("REGISTER");
-		btnNewButton_1_1.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_1_1.setBackground(new Color(109, 41, 50));
-		btnNewButton_1_1.setBounds(0, 400, 243, 63);
-		panel_3.add(btnNewButton_1_1);
+	    registerBtn = new JButton("REGISTER");
+		registerBtn.setForeground(new Color(232, 216, 196));
+		registerBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		registerBtn.setBackground(new Color(109, 41, 50));
+		registerBtn.setBounds(0, 400, 243, 63);
+		registerBtn.addActionListener(this);
+		panel_3.add(registerBtn);
 		
-		JButton btnNewButton_1_1_1 = new JButton("LOG OUT");
-		btnNewButton_1_1_1.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_1_1_1.setBackground(new Color(109, 41, 50));
-		btnNewButton_1_1_1.setBounds(0, 533, 243, 63);
-		panel_3.add(btnNewButton_1_1_1);
+	    LogoutBtn = new JButton("LOG OUT");
+		LogoutBtn.setForeground(new Color(232, 216, 196));
+		LogoutBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		LogoutBtn.setBackground(new Color(109, 41, 50));
+		LogoutBtn.setBounds(0, 596, 243, 63);
+		LogoutBtn.addActionListener(this);
+		panel_3.add(LogoutBtn);
+		
+	    transactionBtn = new JButton("TRANSACTIONS");
+		transactionBtn.setForeground(new Color(232, 216, 196));
+		transactionBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		transactionBtn.setBackground(new Color(109, 41, 50));
+		transactionBtn.setBounds(0, 473, 243, 63);
+		panel_3.add(transactionBtn);
+		
+		JLabel lblNewLabel_3_1 = new JLabel("");
+		lblNewLabel_3_1.setBounds(-23, 412, 280, 339);
+		panel_3.add(lblNewLabel_3_1);
+		lblNewLabel_3_1.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/design1.png")));
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBackground(new Color(142, 60, 71));
@@ -153,45 +179,43 @@ public class Admin_Products extends JFrame {
 		panel_1.add(panel_5);
 		panel_5.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBackground(new Color(232, 216, 196));
-		textField.setForeground(new Color(232, 216, 196));
-		textField.setBounds(159, 109, 172, 34);
-		panel_5.add(textField);
-		textField.setColumns(10);
+		product_id = new JTextField();
+		product_id.setEnabled(false);
+		product_id.setEditable(false);
+		product_id.setBackground(new Color(232, 216, 196));
+		product_id.setForeground(new Color(232, 216, 196));
+		product_id.setBounds(159, 109, 172, 34);
+		panel_5.add(product_id);
+		product_id.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setForeground(new Color(232, 216, 196));
-		textField_1.setColumns(10);
-		textField_1.setBackground(new Color(232, 216, 196));
-		textField_1.setBounds(159, 168, 172, 34);
-		panel_5.add(textField_1);
+		category = new JTextField();
+		category.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		category.setForeground(new Color(0, 0, 0));
+		category.setColumns(10);
+		category.setBackground(new Color(232, 216, 196));
+		category.setBounds(159, 168, 172, 34);
+		panel_5.add(category);
 		
-		textField_2 = new JTextField();
-		textField_2.setForeground(new Color(232, 216, 196));
-		textField_2.setColumns(10);
-		textField_2.setBackground(new Color(232, 216, 196));
-		textField_2.setBounds(159, 228, 172, 34);
-		panel_5.add(textField_2);
+		brand = new JTextField();
+		brand.setForeground(new Color(0, 0, 0));
+		brand.setColumns(10);
+		brand.setBackground(new Color(232, 216, 196));
+		brand.setBounds(159, 228, 172, 34);
+		panel_5.add(brand);
 		
-		textField_3 = new JTextField();
-		textField_3.setForeground(new Color(232, 216, 196));
-		textField_3.setColumns(10);
-		textField_3.setBackground(new Color(232, 216, 196));
-		textField_3.setBounds(159, 284, 172, 34);
-		panel_5.add(textField_3);
+		product_name = new JTextField();
+		product_name.setForeground(new Color(0, 0, 0));
+		product_name.setColumns(10);
+		product_name.setBackground(new Color(232, 216, 196));
+		product_name.setBounds(159, 284, 172, 34);
+		panel_5.add(product_name);
 		
-		textField_5 = new JTextField();
-		textField_5.setForeground(new Color(232, 216, 196));
-		textField_5.setColumns(10);
-		textField_5.setBackground(new Color(232, 216, 196));
-		textField_5.setBounds(159, 403, 172, 34);
-		panel_5.add(textField_5);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBackground(new Color(232, 216, 196));
-		comboBox.setBounds(159, 463, 172, 34);
-		panel_5.add(comboBox);
+		price = new JTextField();
+		price.setForeground(new Color(0, 0, 0));
+		price.setColumns(10);
+		price.setBackground(new Color(232, 216, 196));
+		price.setBounds(159, 403, 172, 34);
+		panel_5.add(price);
 		
 		JLabel lblNewLabel_3 = new JLabel("PRODUCT ID:");
 		lblNewLabel_3.setForeground(new Color(232, 216, 196));
@@ -221,13 +245,6 @@ public class Admin_Products extends JFrame {
 		lblNewLabel_3_2_1.setBounds(24, 293, 113, 13);
 		panel_5.add(lblNewLabel_3_2_1);
 		
-		JLabel lblNewLabel_3_2_1_1 = new JLabel("STATUS:");
-		lblNewLabel_3_2_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_3_2_1_1.setForeground(new Color(232, 216, 196));
-		lblNewLabel_3_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_3_2_1_1.setBounds(24, 473, 113, 13);
-		panel_5.add(lblNewLabel_3_2_1_1);
-		
 		JLabel lblNewLabel_3_3_1 = new JLabel("PRICE:");
 		lblNewLabel_3_3_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_3_3_1.setForeground(new Color(232, 216, 196));
@@ -242,66 +259,69 @@ public class Admin_Products extends JFrame {
 		lblNewLabel_3_2_2.setBounds(10, 353, 127, 13);
 		panel_5.add(lblNewLabel_3_2_2);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setBackground(new Color(232, 216, 196));
-		spinner.setBounds(159, 343, 172, 34);
-		panel_5.add(spinner);
-		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_2.setBackground(new Color(107, 46, 53));
-		panel_2.setBounds(24, 533, 142, 55);
+		panel_2.setBounds(24, 489, 142, 55);
 		panel_5.add(panel_2);
 		panel_2.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("ADD");
-		btnNewButton_1.setForeground(new Color(232, 216, 196));
-		btnNewButton_1.setBackground(new Color(82, 35, 41));
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton_1.setBounds(10, 10, 122, 35);
-		panel_2.add(btnNewButton_1);
+	    AddBtn = new JButton("ADD");
+		AddBtn.setForeground(new Color(232, 216, 196));
+		AddBtn.setBackground(new Color(82, 35, 41));
+		AddBtn.setFont(new Font("Tahoma", Font.BOLD, 15));
+		AddBtn.setBounds(10, 10, 122, 35);
+		AddBtn.addActionListener(this);
+		panel_2.add(AddBtn);
 		
 		JPanel panel_2_1 = new JPanel();
 		panel_2_1.setLayout(null);
 		panel_2_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_2_1.setBackground(new Color(107, 46, 53));
-		panel_2_1.setBounds(199, 533, 142, 55);
+		panel_2_1.setBounds(199, 489, 142, 55);
 		panel_5.add(panel_2_1);
 		
-		JButton btnNewButton_1_2 = new JButton("UPDATE");
-		btnNewButton_1_2.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton_1_2.setBackground(new Color(82, 35, 41));
-		btnNewButton_1_2.setBounds(10, 10, 122, 35);
-		panel_2_1.add(btnNewButton_1_2);
+	    UpdateBtn = new JButton("UPDATE");
+		UpdateBtn.setForeground(new Color(232, 216, 196));
+		UpdateBtn.setFont(new Font("Tahoma", Font.BOLD, 15));
+		UpdateBtn.setBackground(new Color(82, 35, 41));
+		UpdateBtn.setBounds(10, 10, 122, 35);
+		panel_2_1.add(UpdateBtn);
 		
 		JPanel panel_2_2 = new JPanel();
 		panel_2_2.setLayout(null);
 		panel_2_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_2_2.setBackground(new Color(107, 46, 53));
-		panel_2_2.setBounds(24, 598, 142, 55);
+		panel_2_2.setBounds(24, 554, 142, 55);
 		panel_5.add(panel_2_2);
 		
-		JButton btnNewButton_1_3 = new JButton("CLEAR");
-		btnNewButton_1_3.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_3.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton_1_3.setBackground(new Color(82, 35, 41));
-		btnNewButton_1_3.setBounds(10, 10, 122, 35);
-		panel_2_2.add(btnNewButton_1_3);
+	    ClearBtn = new JButton("CLEAR");
+		ClearBtn.setForeground(new Color(232, 216, 196));
+		ClearBtn.setFont(new Font("Tahoma", Font.BOLD, 15));
+		ClearBtn.setBackground(new Color(82, 35, 41));
+		ClearBtn.setBounds(10, 10, 122, 35);
+		panel_2_2.add(ClearBtn);
 		
 		JPanel panel_2_1_1 = new JPanel();
 		panel_2_1_1.setLayout(null);
 		panel_2_1_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_2_1_1.setBackground(new Color(107, 46, 53));
-		panel_2_1_1.setBounds(199, 598, 142, 55);
+		panel_2_1_1.setBounds(199, 554, 142, 55);
 		panel_5.add(panel_2_1_1);
 		
-		JButton btnNewButton_1_2_1 = new JButton("DELETE");
-		btnNewButton_1_2_1.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_2_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton_1_2_1.setBackground(new Color(82, 35, 41));
-		btnNewButton_1_2_1.setBounds(10, 10, 122, 35);
-		panel_2_1_1.add(btnNewButton_1_2_1);
+	    DeleteBtn = new JButton("DELETE");
+		DeleteBtn.setForeground(new Color(232, 216, 196));
+		DeleteBtn.setFont(new Font("Tahoma", Font.BOLD, 15));
+		DeleteBtn.setBackground(new Color(82, 35, 41));
+		DeleteBtn.setBounds(10, 10, 122, 35);
+		panel_2_1_1.add(DeleteBtn);
+		
+		stock_quantity = new JTextField();
+		stock_quantity.setForeground(Color.BLACK);
+		stock_quantity.setColumns(10);
+		stock_quantity.setBackground(new Color(232, 216, 196));
+		stock_quantity.setBounds(159, 344, 172, 34);
+		panel_5.add(stock_quantity);
 		
 		JPanel panel_5_1 = new JPanel();
 		panel_5_1.setLayout(null);
@@ -348,26 +368,99 @@ public class Admin_Products extends JFrame {
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_4.setBackground(new Color(85, 43, 51));
-		panel_4.setBounds(216, 35, 302, 51);
+		panel_4.setBounds(130, 35, 302, 51);
 		panel_5_1.add(panel_4);
 		panel_4.setLayout(null);
 		
-		textField_4 = new JTextField();
-		textField_4.setBackground(new Color(255, 242, 213));
-		textField_4.setBounds(10, 10, 282, 31);
-		panel_4.add(textField_4);
-		textField_4.setColumns(10);
+		search = new JTextField();
+		search.setBackground(new Color(255, 242, 213));
+		search.setBounds(10, 10, 282, 31);
+		panel_4.add(search);
+		search.setColumns(10);
 		
 		JLabel lblNewLabel_3_4 = new JLabel("SEARCH:");
 		lblNewLabel_3_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_3_4.setForeground(new Color(232, 216, 196));
 		lblNewLabel_3_4.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_3_4.setBounds(108, 54, 98, 13);
+		lblNewLabel_3_4.setBounds(22, 54, 98, 13);
 		panel_5_1.add(lblNewLabel_3_4);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBackground(Color.PINK);
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Sort by", "ID", "A to Z"}));
+		comboBox.setBounds(536, 78, 69, 21);
+		panel_5_1.add(comboBox);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/MainBackground.png")));
 		lblNewLabel.setBounds(0, 0, 1311, 713);
 		panel_1.add(lblNewLabel);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		// TODO Auto-generated method stub
+		if(e.getSource() == DashboardBtn)
+		{
+			dispose();
+			new Admin_Dashboard();
+		}
+		else if(e.getSource() ==  transactionBtn)
+		{
+			dispose();
+			new Admin_Transactions();
+		}
+		else if(e.getSource() == registerBtn)
+		{
+			dispose();
+		}
+		else if(e.getSource() == LogoutBtn)
+		{
+			dispose();
+			new AdminLogin();
+		}
+		else if(e.getSource() == AddBtn)
+		{
+			String productCategory = category.getText();
+			String brands = brand.getText();
+			String productName = product_name.getText();
+			String productPrice = price.getText();
+			String stockquantity = stock_quantity.getText();
+			product product = new product();
+			product.Addproduct(productCategory, productName, productPrice, stockquantity, brands);
+			
+			product_id.setText("");
+			category.setText("");
+			brand.setText("");
+			product_name.setText("");
+			price.setText("");
+			stock_quantity.setText("");
+		}
+		else if(e.getSource() == UpdateBtn)
+		{
+			product_id.setText("");
+			category.setText("");
+			brand.setText("");
+			product_name.setText("");
+			price.setText("");
+			stock_quantity.setText("");
+		}
+		
+		else if(e.getSource() == ClearBtn)
+		{
+			
+		}
+		else if(e.getSource() == DeleteBtn)
+		{
+			
+		}
+		else if(e.getSource() == search)
+		{
+			
+		}
+		
 	}
 }
