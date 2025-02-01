@@ -102,7 +102,6 @@ public class loginAuth
 		}
 		
 	}
-	
 	public boolean  loginSuccess()
 	{
 		return loginSuccess;
