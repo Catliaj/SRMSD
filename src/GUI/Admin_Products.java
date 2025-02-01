@@ -34,7 +34,6 @@ public class Admin_Products extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private final JPanel panel_3 = new JPanel();
-	private JTextField product_id;
 	private JTextField category;
 	private JTextField brand;
 	private JTextField product_name;
@@ -70,6 +69,8 @@ public class Admin_Products extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
+	
+	product product = new product();
 	public Admin_Products() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1291, 750);
@@ -179,35 +180,26 @@ public class Admin_Products extends JFrame implements ActionListener{
 		panel_1.add(panel_5);
 		panel_5.setLayout(null);
 		
-		product_id = new JTextField();
-		product_id.setEnabled(false);
-		product_id.setEditable(false);
-		product_id.setBackground(new Color(232, 216, 196));
-		product_id.setForeground(new Color(232, 216, 196));
-		product_id.setBounds(159, 109, 172, 34);
-		panel_5.add(product_id);
-		product_id.setColumns(10);
-		
 		category = new JTextField();
 		category.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		category.setForeground(new Color(0, 0, 0));
 		category.setColumns(10);
 		category.setBackground(new Color(232, 216, 196));
-		category.setBounds(159, 168, 172, 34);
+		category.setBounds(159, 222, 172, 34);
 		panel_5.add(category);
 		
 		brand = new JTextField();
 		brand.setForeground(new Color(0, 0, 0));
 		brand.setColumns(10);
 		brand.setBackground(new Color(232, 216, 196));
-		brand.setBounds(159, 228, 172, 34);
+		brand.setBounds(159, 282, 172, 34);
 		panel_5.add(brand);
 		
 		product_name = new JTextField();
 		product_name.setForeground(new Color(0, 0, 0));
 		product_name.setColumns(10);
 		product_name.setBackground(new Color(232, 216, 196));
-		product_name.setBounds(159, 284, 172, 34);
+		product_name.setBounds(159, 162, 172, 34);
 		panel_5.add(product_name);
 		
 		price = new JTextField();
@@ -217,32 +209,25 @@ public class Admin_Products extends JFrame implements ActionListener{
 		price.setBounds(159, 403, 172, 34);
 		panel_5.add(price);
 		
-		JLabel lblNewLabel_3 = new JLabel("PRODUCT ID:");
-		lblNewLabel_3.setForeground(new Color(232, 216, 196));
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_3.setBounds(39, 119, 98, 13);
-		panel_5.add(lblNewLabel_3);
-		
 		JLabel lblNewLabel_3_2 = new JLabel("CATEGORY:");
 		lblNewLabel_3_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_3_2.setForeground(new Color(232, 216, 196));
 		lblNewLabel_3_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_3_2.setBounds(39, 178, 98, 13);
+		lblNewLabel_3_2.setBounds(39, 232, 98, 13);
 		panel_5.add(lblNewLabel_3_2);
 		
 		JLabel lblNewLabel_3_3 = new JLabel("BRAND:");
 		lblNewLabel_3_3.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_3_3.setForeground(new Color(232, 216, 196));
 		lblNewLabel_3_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_3_3.setBounds(39, 237, 98, 13);
+		lblNewLabel_3_3.setBounds(39, 291, 98, 13);
 		panel_5.add(lblNewLabel_3_3);
 		
 		JLabel lblNewLabel_3_2_1 = new JLabel("PRODUCT NAME:");
 		lblNewLabel_3_2_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_3_2_1.setForeground(new Color(232, 216, 196));
 		lblNewLabel_3_2_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_3_2_1.setBounds(24, 293, 113, 13);
+		lblNewLabel_3_2_1.setBounds(24, 171, 113, 13);
 		panel_5.add(lblNewLabel_3_2_1);
 		
 		JLabel lblNewLabel_3_3_1 = new JLabel("PRICE:");
@@ -286,6 +271,7 @@ public class Admin_Products extends JFrame implements ActionListener{
 		UpdateBtn.setFont(new Font("Tahoma", Font.BOLD, 15));
 		UpdateBtn.setBackground(new Color(82, 35, 41));
 		UpdateBtn.setBounds(10, 10, 122, 35);
+		UpdateBtn.addActionListener(this);
 		panel_2_1.add(UpdateBtn);
 		
 		JPanel panel_2_2 = new JPanel();
@@ -300,6 +286,7 @@ public class Admin_Products extends JFrame implements ActionListener{
 		ClearBtn.setFont(new Font("Tahoma", Font.BOLD, 15));
 		ClearBtn.setBackground(new Color(82, 35, 41));
 		ClearBtn.setBounds(10, 10, 122, 35);
+		ClearBtn.addActionListener(this);
 		panel_2_2.add(ClearBtn);
 		
 		JPanel panel_2_1_1 = new JPanel();
@@ -314,6 +301,7 @@ public class Admin_Products extends JFrame implements ActionListener{
 		DeleteBtn.setFont(new Font("Tahoma", Font.BOLD, 15));
 		DeleteBtn.setBackground(new Color(82, 35, 41));
 		DeleteBtn.setBounds(10, 10, 122, 35);
+		DeleteBtn.addActionListener(this);
 		panel_2_1_1.add(DeleteBtn);
 		
 		stock_quantity = new JTextField();
@@ -321,6 +309,7 @@ public class Admin_Products extends JFrame implements ActionListener{
 		stock_quantity.setColumns(10);
 		stock_quantity.setBackground(new Color(232, 216, 196));
 		stock_quantity.setBounds(159, 344, 172, 34);
+		stock_quantity.addActionListener(this);
 		panel_5.add(stock_quantity);
 		
 		JPanel panel_5_1 = new JPanel();
@@ -337,30 +326,9 @@ public class Admin_Products extends JFrame implements ActionListener{
 		table = new JTable();
 		table.setBackground(new Color(215, 215, 215));
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-			},
+			new Object[][] {			},
 			new String[] {
-				"Product ID", "Category", "Brand", "Product Name", "Quantity", "Price", "Status"
+				"Category", "Product Name", "Brand","Price", "Quantity"
 			}
 		));
 		scrollPane.setViewportView(table);
@@ -397,6 +365,8 @@ public class Admin_Products extends JFrame implements ActionListener{
 		panel_1.add(lblNewLabel);
 		setLocationRelativeTo(null);
 		setVisible(true);
+		
+		product.loadProductintoTable(table);
 	}
 
 	@Override
@@ -429,33 +399,46 @@ public class Admin_Products extends JFrame implements ActionListener{
 			String productName = product_name.getText();
 			String productPrice = price.getText();
 			String stockquantity = stock_quantity.getText();
-			product product = new product();
-			product.Addproduct(productCategory, productName, productPrice, stockquantity, brands);
 			
-			product_id.setText("");
+			product.Addproduct(productCategory, productName, productPrice, stockquantity, brands);
+	
 			category.setText("");
 			brand.setText("");
 			product_name.setText("");
 			price.setText("");
 			stock_quantity.setText("");
+			product.loadProductintoTable(table);
 		}
 		else if(e.getSource() == UpdateBtn)
 		{
-			product_id.setText("");
+			String productCategory = category.getText();
+			String brands = brand.getText();
+			String productName = product_name.getText();
+			String productPrice = price.getText();
+			String stockquantity = stock_quantity.getText();
+			product.Updateproduct(productCategory, productName, productPrice, stockquantity, brands);
+	
 			category.setText("");
 			brand.setText("");
 			product_name.setText("");
 			price.setText("");
 			stock_quantity.setText("");
+			product.loadProductintoTable(table);
 		}
 		
 		else if(e.getSource() == ClearBtn)
 		{
-			
+			category.setText("");
+			brand.setText("");
+			product_name.setText("");
+			price.setText("");
+			stock_quantity.setText("");
 		}
 		else if(e.getSource() == DeleteBtn)
 		{
-			
+			String productName = product_name.getText();
+			product.Deleteproduct(productName);
+			product.loadProductintoTable(table);
 		}
 		else if(e.getSource() == search)
 		{

@@ -7,5 +7,7 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/AcerN/eclipse-workspace/SRMSD-2205/mysql-connector-j-9.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AcerN/eclipse-workspace/SRMSD-2205/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AcerN/eclipse-workspace/SRMSD-2205/jgoodies-common-1.2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

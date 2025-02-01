@@ -145,6 +145,7 @@ public class UserLogin extends JFrame implements ActionListener{
 			if(authentication.loginSuccess())
 			{
 				dispose();
+				new SalesPerson_POS();
 			}
 			else
 			{
