@@ -2,31 +2,34 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import models.loginAuth;
-
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import java.awt.Font;
 
-public class Admin_Transactions extends JFrame implements ActionListener{
+public class Admin_Transactions extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField usernameField;
-	private JPasswordField passwordField;
-	private JButton btnReset;
-	private JButton btnLogin;
-	private JButton btnBack;
+	private JTable table;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+
 	/**
 	 * Launch the application.
 	 */
@@ -34,7 +37,7 @@ public class Admin_Transactions extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminLogin frame = new AdminLogin();
+					Admin_Transactions frame = new Admin_Transactions();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,122 +50,145 @@ public class Admin_Transactions extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public Admin_Transactions() {
-		setTitle("IM Activity 1");
-		setForeground(new Color(0, 0, 0));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 699, 528);
+		setBounds(0, 0, 1335, 758);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(86, 28, 36));
+		contentPane.setBackground(new Color(128, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setLocationRelativeTo(null);
-        setResizable(false);
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setIcon(new ImageIcon(LoginMenu.class.getResource("/Resources/Adminlogin.png")));
-		lblNewLabel.setBounds(0, 0, 685, 490);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Admin_Transactions.class.getResource("/Resources/MainBackground.png")));
+		lblNewLabel.setBounds(0, 0, 13020, 720);
 		contentPane.add(lblNewLabel);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 685, 490);
+		panel.setBounds(0, 0, 1320, 745);
 		panel.setOpaque(false); // Makes the panel transparent
         panel.setBackground(new Color(0, 0, 0, 0)); // Fully transparent background
 		lblNewLabel.add(panel);
 		panel.setLayout(null);
 		
 		
-		usernameField = new JTextField();
-		usernameField.setFont(new Font("Tahoma", Font.BOLD, 10));
-		usernameField.setBackground(new Color(232, 216, 196));
-		usernameField.setBounds(273, 202, 171, 24);
-		panel.add(usernameField);
-		usernameField.setColumns(10);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBackground(new Color(232, 216, 196));
-		passwordField.setBounds(273, 249, 171, 25);
-		panel.add(passwordField);
-		
-		
-	    btnReset = new JButton("RESET");
-		btnReset.setBackground(new Color(86, 28, 36));
-		btnReset.setForeground(new Color(255, 255, 255));
-		btnReset.addActionListener(this);
-		btnReset.setBounds(283, 284, 117, 20);
-		panel.add(btnReset);
-		
-		
-	    btnLogin = new JButton("LOGIN");
-		btnLogin.setBackground(new Color(86, 28, 36));
-		btnLogin.setForeground(new Color(255, 255, 255));
-		btnLogin.addActionListener(this);
-		btnLogin.setBounds(283, 309, 117, 20);
-		panel.add(btnLogin);
-		
-	    btnBack = new JButton("BACK");
-		btnBack.addActionListener(this);
-		btnBack.setForeground(Color.WHITE);
-		btnBack.setBackground(new Color(86, 28, 36));
-		btnBack.setBounds(283, 334, 117, 20);
-		panel.add(btnBack);
-		
-		JLabel adminloginlbl = new JLabel("ADMIN LOGIN");
-		adminloginlbl.setForeground(new Color(62, 19, 28));
-		adminloginlbl.setFont(new Font("Tahoma", Font.BOLD, 23));
-		adminloginlbl.setBounds(273, 147, 179, 26);
-		panel.add(adminloginlbl);
-		
-		JLabel lblNewLabel_1 = new JLabel("USERNAME");
-		lblNewLabel_1.setForeground(new Color(232, 216, 196));
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 10));
-		lblNewLabel_1.setBounds(273, 189, 77, 13);
-		panel.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("PASSWORD");
-		lblNewLabel_1_1.setForeground(new Color(232, 216, 196));
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 10));
-		lblNewLabel_1_1.setBounds(273, 236, 77, 13);
-		panel.add(lblNewLabel_1_1);
-		
-		
-		
-	}
+		JButton btnDashboard = new JButton("DASHBOARD");
+		btnDashboard.setBackground(new Color(109, 41, 50));
+		btnDashboard.setForeground(new Color(232, 216, 196));
+		btnDashboard.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnDashboard.setBounds(0, 254, 243, 63);
+		panel.add(btnDashboard);
 
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		// TODO Auto-generated method stub
-		// reset action button
-		if(e.getSource() == btnReset)
-		{
-			usernameField.setText("");
-			passwordField.setText("");
-		}
-		// login action button
-		else if(e.getSource()== btnLogin)
-		{
-			loginAuth authentication  = new loginAuth();
-			String username = usernameField.getText();
-			String password = String.valueOf(passwordField.getPassword());
-			authentication.adminLogin(username, password);
-			if(authentication.loginSuccess())
-			{
-				dispose();
-				new Admin_Dashboard();
+		
+		JButton btnProducts = new JButton("PRODUCTS");
+		btnProducts.setForeground(new Color(232, 216, 196));
+		btnProducts.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnProducts.setBackground(new Color(109, 41, 50));
+		btnProducts.setBounds(0, 327, 243, 63);
+		panel.add(btnProducts);
+		
+		
+		JButton btnRegister = new JButton("REGISTER");
+		btnRegister.setForeground(new Color(232, 216, 196));
+		btnRegister.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnRegister.setBackground(new Color(109, 41, 50));
+		btnRegister.setBounds(0, 400, 243, 63);
+		panel.add(btnRegister);
+		
+		
+		JButton btnTransactions = new JButton("TRANSACTIONS");
+		btnTransactions.setForeground(new Color(232, 216, 196));
+		btnTransactions.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnTransactions.setBackground(new Color(109, 41, 50));
+		btnTransactions.setBounds(0, 473, 243, 63);
+		panel.add(btnTransactions);
+		
+		btnTransactions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			}
-			else
-			{
-				usernameField.setText("");
-				passwordField.setText("");
+		});
+		
+		
+		JButton btnLogOut = new JButton("LOG OUT");
+		btnLogOut.setForeground(new Color(232, 216, 196));
+		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnLogOut.setBackground(new Color(109, 41, 50));
+		btnLogOut.setBounds(0, 587, 243, 63);
+		panel.add(btnLogOut);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(529, 28, 289, 46);
+		panel.add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(925, 28, 289, 46);
+		panel.add(comboBox_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(278, 87, 1030, 345);
+		panel.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column", "New column"
 			}
-		}
-		// back action button
-		else if(e.getSource() == btnBack)
-		{
-			dispose();
-			new LoginMenu();
-		}
+		));
+		scrollPane.setViewportView(table);
+		
+		textField = new JTextField();
+		textField.setBounds(506, 473, 161, 36);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(427, 538, 258, 36);
+		panel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(428, 596, 147, 36);
+		panel.add(textField_2);
+		textField_2.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(871, 538, 40, 36);
+		panel.add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_4 = new JTextField();
+		textField_4.setBounds(736, 596, 175, 36);
+		panel.add(textField_4);
+		textField_4.setColumns(10);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(382, 659, 129, 40);
+		panel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.setBounds(538, 659, 129, 40);
+		panel.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("New button");
+		btnNewButton_2.setBounds(697, 97, 85, 21);
+		panel.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("New button");
+		btnNewButton_3.setBounds(697, 659, 129, 40);
+		panel.add(btnNewButton_3);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(981, 598, 292, 69);
+		panel.add(textField_5);
+		textField_5.setColumns(10);
+		
+		
+		
 	}
 }
