@@ -133,6 +133,8 @@ public class Admin_Register extends JFrame {
 		panel_3.add(btnProducts);
 		
 		JButton btnNewButton_1_1 = new JButton("REGISTER");
+
+
 		btnNewButton_1_1.setForeground(new Color(232, 216, 196));
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnNewButton_1_1.setBackground(new Color(109, 41, 50));
