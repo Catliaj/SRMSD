@@ -243,19 +243,19 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		lblNewLabel_5.setBounds(10, 22, 125, 415);
 		panel_4_1_1.add(lblNewLabel_5);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBackground(new Color(232, 216, 196));
-		panel_5.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_5.setBounds(298, 219, 446, 392);
-		panel_1.add(panel_5);
-		panel_5.setLayout(null);
+		JPanel salestrendpanel = new JPanel();
+		salestrendpanel.setBackground(new Color(232, 216, 196));
+		salestrendpanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		salestrendpanel.setBounds(298, 219, 446, 392);
+		panel_1.add(salestrendpanel);
+		salestrendpanel.setLayout(null);
 		
-		JPanel panel_5_1 = new JPanel();
-		panel_5_1.setLayout(null);
-		panel_5_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_5_1.setBackground(new Color(232, 216, 196));
-		panel_5_1.setBounds(775, 218, 446, 393);
-		panel_1.add(panel_5_1);
+		JPanel performancepanel = new JPanel();
+		performancepanel.setLayout(null);
+		performancepanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		performancepanel.setBackground(new Color(232, 216, 196));
+		performancepanel.setBounds(775, 218, 446, 393);
+		panel_1.add(performancepanel);
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setBackground(new Color(190, 167, 139));
@@ -333,6 +333,8 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		{
 			dispose();
 			new AdminLogin();
+			
+			
 		}
 	}
 }

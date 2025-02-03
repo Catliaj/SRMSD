@@ -45,7 +45,6 @@ public class Admin_Products extends JFrame implements ActionListener{
 	private JTextField stock_quantity;
 	private JButton AddBtn;
 	private JButton UpdateBtn;
-	private JButton ClearBtn;
 	private JButton DeleteBtn;
 	private JButton DashboardBtn;
 	private JButton btnProducts;
@@ -276,26 +275,11 @@ public class Admin_Products extends JFrame implements ActionListener{
 		UpdateBtn.addActionListener(this);
 		panel_2_1.add(UpdateBtn);
 		
-		JPanel panel_2_2 = new JPanel();
-		panel_2_2.setLayout(null);
-		panel_2_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_2_2.setBackground(new Color(107, 46, 53));
-		panel_2_2.setBounds(24, 554, 142, 55);
-		panel_5.add(panel_2_2);
-		
-	    ClearBtn = new JButton("CLEAR");
-		ClearBtn.setForeground(new Color(232, 216, 196));
-		ClearBtn.setFont(new Font("Tahoma", Font.BOLD, 15));
-		ClearBtn.setBackground(new Color(82, 35, 41));
-		ClearBtn.setBounds(10, 10, 122, 35);
-		ClearBtn.addActionListener(this);
-		panel_2_2.add(ClearBtn);
-		
 		JPanel panel_2_1_1 = new JPanel();
 		panel_2_1_1.setLayout(null);
 		panel_2_1_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_2_1_1.setBackground(new Color(107, 46, 53));
-		panel_2_1_1.setBounds(199, 554, 142, 55);
+		panel_2_1_1.setBounds(109, 567, 142, 55);
 		panel_5.add(panel_2_1_1);
 		
 	    DeleteBtn = new JButton("DELETE");
@@ -449,14 +433,6 @@ public class Admin_Products extends JFrame implements ActionListener{
 			product.loadProductintoTable(table);
 		}
 		
-		else if(e.getSource() == ClearBtn)
-		{
-			category.setText("");
-			brand.setText("");
-			product_name.setText("");
-			price.setText("");
-			stock_quantity.setText("");
-		}
 		else if(e.getSource() == DeleteBtn)
 		{
 			String productName = product_name.getText();

@@ -252,7 +252,7 @@ public class Admin_Register extends JFrame implements ActionListener
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_2.setBackground(new Color(107, 46, 53));
-		panel_2.setBounds(41, 199, 142, 55);
+		panel_2.setBounds(177, 199, 142, 55);
 		panel_5.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -268,7 +268,7 @@ public class Admin_Register extends JFrame implements ActionListener
 		panel_2_1.setLayout(null);
 		panel_2_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_2_1.setBackground(new Color(107, 46, 53));
-		panel_2_1.setBounds(278, 199, 142, 55);
+		panel_2_1.setBounds(416, 199, 142, 55);
 		panel_5.add(panel_2_1);
 		
 	    UpdateBtn = new JButton("UPDATE");
@@ -283,7 +283,7 @@ public class Admin_Register extends JFrame implements ActionListener
 		panel_2_2.setLayout(null);
 		panel_2_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_2_2.setBackground(new Color(107, 46, 53));
-		panel_2_2.setBounds(531, 199, 142, 55);
+		panel_2_2.setBounds(670, 199, 142, 55);
 		panel_5.add(panel_2_2);
 		
 	    DeleteBtn = new JButton("DELETE");
@@ -294,20 +294,7 @@ public class Admin_Register extends JFrame implements ActionListener
 		DeleteBtn.addActionListener(this);
 		panel_2_2.add(DeleteBtn);
 		
-		JPanel panel_2_1_1 = new JPanel();
-		panel_2_1_1.setLayout(null);
-		panel_2_1_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_2_1_1.setBackground(new Color(107, 46, 53));
-		panel_2_1_1.setBounds(817, 199, 142, 55);
-		panel_5.add(panel_2_1_1);
-		
-	    clearBtn = new JButton("CLEAR");
-		clearBtn.setForeground(new Color(232, 216, 196));
-		clearBtn.setFont(new Font("Tahoma", Font.BOLD, 15));
-		clearBtn.setBackground(new Color(82, 35, 41));
-		clearBtn.setBounds(10, 10, 122, 35);
-		panel_2_1_1.add(clearBtn);
-		
+
 		JLabel lblNewLabel_3_3_1_1 = new JLabel("MIDDLE NAME:");
 		lblNewLabel_3_3_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_3_3_1_1.setForeground(new Color(232, 216, 196));

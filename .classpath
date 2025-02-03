@@ -21,10 +21,13 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
+=======
 	<classpathentry kind="lib" path="C:/Users/Jared Abellera/Documents/GitHub/SRMSD/SRMSD/jfreechart-1.5.2.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+>>>>>>> 3fd3f1200b878c8c50e99aeca7f23d431a623554
 	<classpathentry kind="output" path="bin"/>
 </classpath>

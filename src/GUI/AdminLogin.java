@@ -24,7 +24,6 @@ public class AdminLogin extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
-	private JButton btnReset;
 	private JButton btnLogin;
 	private JButton btnBack;
 	/**
@@ -86,32 +85,24 @@ public class AdminLogin extends JFrame implements ActionListener{
 		panel.add(passwordField);
 		
 		
-	    btnReset = new JButton("RESET");
-		btnReset.setBackground(new Color(86, 28, 36));
-		btnReset.setForeground(new Color(255, 255, 255));
-		btnReset.addActionListener(this);
-		btnReset.setBounds(283, 284, 117, 20);
-		panel.add(btnReset);
-		
-		
 	    btnLogin = new JButton("LOGIN");
 		btnLogin.setBackground(new Color(86, 28, 36));
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.addActionListener(this);
-		btnLogin.setBounds(283, 309, 117, 20);
+		btnLogin.setBounds(295, 305, 117, 20);
 		panel.add(btnLogin);
 		
 	    btnBack = new JButton("BACK");
 		btnBack.addActionListener(this);
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setBackground(new Color(86, 28, 36));
-		btnBack.setBounds(283, 334, 117, 20);
+		btnBack.setBounds(295, 335, 117, 20);
 		panel.add(btnBack);
 		
 		JLabel adminloginlbl = new JLabel("ADMIN LOGIN");
 		adminloginlbl.setForeground(new Color(62, 19, 28));
-		adminloginlbl.setFont(new Font("Tahoma", Font.BOLD, 23));
-		adminloginlbl.setBounds(273, 147, 179, 26);
+		adminloginlbl.setFont(new Font("Tahoma", Font.BOLD, 20));
+		adminloginlbl.setBounds(283, 144, 335, 26);
 		panel.add(adminloginlbl);
 		
 		JLabel lblNewLabel_1 = new JLabel("USERNAME");
@@ -134,15 +125,7 @@ public class AdminLogin extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		// TODO Auto-generated method stub
-		// reset action button
-		if(e.getSource() == btnReset)
-		{
-			usernameField.setText("");
-			passwordField.setText("");
-		}
-		// login action button
-		else if(e.getSource()== btnLogin)
+		if(e.getSource()== btnLogin)
 		{
 			loginAuth authentication  = new loginAuth();
 			String username = usernameField.getText();
