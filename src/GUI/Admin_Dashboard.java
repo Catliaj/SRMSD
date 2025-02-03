@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class Admin_Dashboard extends JFrame implements ActionListener 
 {
@@ -155,7 +156,7 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel_2.setBackground(new Color(188, 120, 129));
-		panel_2.setBounds(278, 23, 303, 168);
+		panel_2.setBounds(278, 21, 303, 168);
 		panel_1.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -173,15 +174,31 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		panel_4.add(lblNewLabel_3_3);
 		
 		textField = new JTextField();
-		textField.setForeground(new Color(0, 0, 0));
-		textField.setBounds(127, 38, 134, 64);
+		textField.setBackground(new Color(232, 216, 196));
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setFont(new Font("Tahoma", Font.BOLD, 20));
+		textField.setForeground(new Color(142, 60, 71));
+		textField.setBounds(111, 38, 150, 64);
 		panel_4.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setBounds(7, 26, 110, 399);
-		panel_4.add(lblNewLabel_4);
-		lblNewLabel_4.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/topicon.png")));
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/topicon.png")));
+		btnNewButton.setContentAreaFilled(false);
+		btnNewButton.setBorderPainted(false);
+		btnNewButton.setFocusPainted(false);
+		btnNewButton.setBounds(9, 23, 92, 95);
+		panel_4.add(btnNewButton);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+				TopSelling_Popup topPopUpFrame = new TopSelling_Popup(); // Open the Customers frame
+				topPopUpFrame.setVisible(true); // Set the Customers frame visible
+			}
+		});
+		
 		
 		JPanel panel_2_1 = new JPanel();
 		panel_2_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
@@ -204,19 +221,26 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		panel_4_1.add(lblNewLabel_3_3_1);
 		
 		textField_1 = new JTextField();
+		textField_1.setForeground(new Color(142, 60, 71));
+		textField_1.setBackground(new Color(232, 216, 196));
 		textField_1.setColumns(10);
-		textField_1.setBounds(128, 37, 134, 64);
+		textField_1.setBounds(111, 38, 150, 64);
+		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		panel_4_1.add(textField_1);
 		
-		JLabel lblNewLabel_6 = new JLabel("");
-		lblNewLabel_6.setBounds(10, -148, 497, 766);
-		panel_4_1.add(lblNewLabel_6);
-		lblNewLabel_6.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/revenueicon.png")));
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/revenueicon.png")));
+		btnNewButton_1.setContentAreaFilled(false);
+		btnNewButton_1.setBorderPainted(false);
+		btnNewButton_1.setFocusPainted(false);
+		btnNewButton_1.setBounds(10, 23, 92, 95);
+		panel_4_1.add(btnNewButton_1);
 		
 		JPanel panel_2_2 = new JPanel();
 		panel_2_2.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel_2_2.setBackground(new Color(188, 120, 129));
-		panel_2_2.setBounds(947, 20, 303, 168);
+		panel_2_2.setBounds(947, 21, 303, 168);
 		panel_1.add(panel_2_2);
 		panel_2_2.setLayout(null);
 		
@@ -234,28 +258,45 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		panel_4_1_1.add(lblNewLabel_3_3_1_1);
 		
 		textField_2 = new JTextField();
+		textField_2.setBackground(new Color(232, 216, 196));
 		textField_2.setColumns(10);
-		textField_2.setBounds(139, 36, 134, 64);
+		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_2.setFont(new Font("Tahoma", Font.BOLD, 20));
+		textField_2.setForeground(new Color(142, 60, 71));
+		textField_2.setBounds(111, 38, 150, 64);
 		panel_4_1_1.add(textField_2);
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/alerticon.png")));
-		lblNewLabel_5.setBounds(10, 22, 125, 415);
-		panel_4_1_1.add(lblNewLabel_5);
 		
-		JPanel salestrendpanel = new JPanel();
-		salestrendpanel.setBackground(new Color(232, 216, 196));
-		salestrendpanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		salestrendpanel.setBounds(298, 219, 446, 392);
-		panel_1.add(salestrendpanel);
-		salestrendpanel.setLayout(null);
+		JButton btnNewButton_1_1 = new JButton("");
+		btnNewButton_1_1.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/alerticon.png")));
+		btnNewButton_1_1.setContentAreaFilled(false);
+		btnNewButton_1_1.setBorderPainted(false);
+		btnNewButton_1_1.setFocusPainted(false);
+		btnNewButton_1_1.setBounds(10, 23, 92, 95);
+		panel_4_1_1.add(btnNewButton_1_1);
 		
-		JPanel performancepanel = new JPanel();
-		performancepanel.setLayout(null);
-		performancepanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		performancepanel.setBackground(new Color(232, 216, 196));
-		performancepanel.setBounds(775, 218, 446, 393);
-		panel_1.add(performancepanel);
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+				LowStock_Popup topPopUpFrame = new LowStock_Popup(); // Open the Customers frame
+				topPopUpFrame.setVisible(true); // Set the Customers frame visible
+			}
+		});
+		
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(new Color(232, 216, 196));
+		panel_5.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_5.setBounds(298, 219, 446, 392);
+		panel_1.add(panel_5);
+		panel_5.setLayout(null);
+		
+		JPanel panel_5_1 = new JPanel();
+		panel_5_1.setLayout(null);
+		panel_5_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_5_1.setBackground(new Color(232, 216, 196));
+		panel_5_1.setBounds(775, 218, 446, 393);
+		panel_1.add(panel_5_1);
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setBackground(new Color(190, 167, 139));
@@ -333,8 +374,6 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		{
 			dispose();
 			new AdminLogin();
-			
-			
 		}
 	}
 }
