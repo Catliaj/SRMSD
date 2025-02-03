@@ -406,7 +406,9 @@ public class Admin_Products extends JFrame implements ActionListener{
 		}
 		else if(e.getSource() == registerBtn)
 		{
+			
 			dispose();
+			new Admin_Register();
 		}
 		else if(e.getSource() == LogoutBtn)
 		{

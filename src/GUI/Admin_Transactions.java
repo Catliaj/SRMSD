@@ -1,5 +1,7 @@
 package GUI;
 
-public class Admin_Transactions {
-
+public class Admin_Transactions 
+{
+	
+	
 }
