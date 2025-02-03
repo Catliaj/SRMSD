@@ -127,7 +127,8 @@ public class AdminLogin extends JFrame implements ActionListener{
 		panel.add(lblNewLabel_1_1);
 		
 		
-		
+		setVisible(true);
+		setLocationRelativeTo(null);
 	}
 
 	@Override

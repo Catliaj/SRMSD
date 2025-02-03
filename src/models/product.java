@@ -23,20 +23,14 @@ public class product
 		setBrand(brand);
 		
 		try
-		{
-			getProductCategory();
-			getProductName();
-			getProductPrice();
-			getProductQuantity();
-			getBrand();
-			
+		{	
 			connection = db.getConnection();
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO products (product_name, category, price, stock_quantity, brand) VALUES (?, ?, ?, ?, ?)");
-			ps.setString(1, productName);
-			ps.setString(2, productCategory);
-			ps.setString(3, productPrice);
-			ps.setString(4, productQuantity);
-			ps.setString(5, brand);
+			ps.setString(1, getProductName());
+			ps.setString(2, getProductCategory());
+			ps.setString(3, getProductPrice());
+			ps.setString(4, getProductQuantity());
+			ps.setString(5, getBrand());
 			ps.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Product Added Successfully ");
 			
@@ -116,6 +110,8 @@ public class product
 			JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
 		}
 	}
+	
+	
 	
 	
 	
