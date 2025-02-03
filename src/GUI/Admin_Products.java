@@ -15,6 +15,8 @@ import javax.swing.border.SoftBevelBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
@@ -315,6 +317,21 @@ public class Admin_Products extends JFrame implements ActionListener{
 				"Category", "Product Name", "Brand","Price", "Quantity"
 			}
 		));
+		table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow >= 0) {
+                    // Fill text fields with selected row data
+                	category.setText(table.getValueAt(selectedRow, 0).toString());
+                	product_name.setText(table.getValueAt(selectedRow, 1).toString());
+                	brand.setText(table.getValueAt(selectedRow, 2).toString());
+                	price.setText(table.getValueAt(selectedRow, 3).toString());
+                	stock_quantity.setText(table.getValueAt(selectedRow, 4).toString());
+                }
+            }
+        });
+
 		scrollPane.setViewportView(table);
 		
 		JPanel panel_4 = new JPanel();
@@ -351,6 +368,10 @@ public class Admin_Products extends JFrame implements ActionListener{
 		setVisible(true);
 		
 		product.loadProductintoTable(table);
+		
+
+
+
 	}
 
 	@Override
@@ -369,7 +390,9 @@ public class Admin_Products extends JFrame implements ActionListener{
 		}
 		else if(e.getSource() == registerBtn)
 		{
+			
 			dispose();
+			new Admin_Register();
 		}
 		else if(e.getSource() == LogoutBtn)
 		{

@@ -325,7 +325,9 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		}
 		else if(e.getSource() == RegisterBtn)
 		{
+			
 			dispose();
+			new Admin_Register();
 		}
 		else if(e.getSource() == logoutBtn)
 		{

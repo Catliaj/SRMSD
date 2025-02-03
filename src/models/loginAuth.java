@@ -23,6 +23,7 @@ public class loginAuth
 			PreparedStatement ps = connection.prepareStatement(Query);
 			ps.setString(1, getUserName());
 			ps.setString(2, getPassword());
+			
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next())
