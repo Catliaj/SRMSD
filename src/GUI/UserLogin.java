@@ -23,7 +23,6 @@ public class UserLogin extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
-	private JButton btnReset;
 	private JButton btnLogin;
 	private JButton btnBack;
 	/**
@@ -75,68 +74,54 @@ public class UserLogin extends JFrame implements ActionListener{
 		usernameField = new JTextField();
 		usernameField.setFont(new Font("Tahoma", Font.BOLD, 10));
 		usernameField.setBackground(new Color(232, 216, 196));
-		usernameField.setBounds(272, 188, 171, 24);
+		usernameField.setBounds(273, 200, 171, 24);
 		panel.add(usernameField);
 		usernameField.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBackground(new Color(232, 216, 196));
-		passwordField.setBounds(272, 234, 171, 25);
+		passwordField.setBounds(273, 246, 171, 25);
 		panel.add(passwordField);
-		
-	    btnReset = new JButton("RESET");
-		btnReset.setBackground(new Color(86, 28, 36));
-		btnReset.setForeground(new Color(255, 255, 255));
-		btnReset.addActionListener(this);
-		btnReset.setBounds(287, 269, 117, 20);
-		panel.add(btnReset);
 		
 		
 	    btnLogin = new JButton("LOGIN");
 		btnLogin.setBackground(new Color(86, 28, 36));
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.addActionListener(this);
-		btnLogin.setBounds(287, 294, 117, 20);
+		btnLogin.setBounds(298, 297, 117, 20);
 		panel.add(btnLogin);
 		
 	    btnBack = new JButton("BACK");
 		btnBack.addActionListener(this);
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setBackground(new Color(86, 28, 36));
-		btnBack.setBounds(287, 319, 117, 20);
+		btnBack.setBounds(298, 327, 117, 20);
 		panel.add(btnBack);
 		
 		
 		JLabel lblNewLabel_1 = new JLabel("USERNAME");
 		lblNewLabel_1.setForeground(new Color(232, 216, 196));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 10));
-		lblNewLabel_1.setBounds(272, 175, 94, 13);
+		lblNewLabel_1.setBounds(273, 187, 94, 13);
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("PASSWORD");
 		lblNewLabel_1_1.setForeground(new Color(232, 216, 196));
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 10));
-		lblNewLabel_1_1.setBounds(272, 222, 94, 13);
+		lblNewLabel_1_1.setBounds(273, 234, 94, 13);
 		panel.add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("USER LOGIN");
+		JLabel lblNewLabel_1_2 = new JLabel("SALESPERSON LOGIN");
 		lblNewLabel_1_2.setForeground(new Color(62, 19, 28));
-		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 23));
-		lblNewLabel_1_2.setBounds(282, 138, 147, 24);
+		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel_1_2.setBounds(250, 152, 254, 24);
 		panel.add(lblNewLabel_1_2);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		// TODO Auto-generated method stub
-		if(e.getSource() == btnReset)
-		{
-			usernameField.setText("");
-			passwordField.setText("");
-		}
-		// login action button
-		else if(e.getSource()== btnLogin)
+		if(e.getSource()== btnLogin)
 		{
 			loginAuth authentication  = new loginAuth();
 			String username = usernameField.getText();
@@ -159,5 +144,6 @@ public class UserLogin extends JFrame implements ActionListener{
 			dispose();
 			new LoginMenu();
 		}
+	
 	}
 }

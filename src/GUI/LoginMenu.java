@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class LoginMenu extends JFrame {
 
@@ -51,7 +52,7 @@ public class LoginMenu extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(LoginMenu.class.getResource("/Resources/LoginBackground.png")));
+		lblNewLabel.setIcon(new ImageIcon(LoginMenu.class.getResource("/Resources/Login.png")));
 		lblNewLabel.setBounds(0, 0, 685, 490);
 		contentPane.add(lblNewLabel);
 		
@@ -68,7 +69,7 @@ public class LoginMenu extends JFrame {
 		btnUser.setContentAreaFilled(false);
 		btnUser.setBorderPainted(false);
 		btnUser.setFocusPainted(false);
-		btnUser.setBounds(144, 166, 98, 95);
+		btnUser.setBounds(181, 166, 98, 95);
 		panel.add(btnUser);
 		
 		btnUser.addActionListener(new ActionListener() {
@@ -85,8 +86,20 @@ public class LoginMenu extends JFrame {
 		btnAdmin.setContentAreaFilled(false);
 		btnAdmin.setBorderPainted(false);
 		btnAdmin.setFocusPainted(false);		
-		btnAdmin.setBounds(441, 166, 98, 95);
+		btnAdmin.setBounds(406, 166, 98, 95);
 		panel.add(btnAdmin);
+		
+		JLabel lblNewLabel_1 = new JLabel("SALESPERSON");
+		lblNewLabel_1.setForeground(new Color(227, 221, 200));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel_1.setBounds(162, 350, 184, 25);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("ADMIN");
+		lblNewLabel_1_1.setForeground(new Color(227, 221, 200));
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel_1_1.setBounds(416, 350, 184, 25);
+		panel.add(lblNewLabel_1_1);
 		
 		btnAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
