@@ -277,7 +277,6 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		
 				LowStock_Popup topPopUpFrame = new LowStock_Popup(); // Open the Customers frame
 				topPopUpFrame.setVisible(true); // Set the Customers frame visible
 			}

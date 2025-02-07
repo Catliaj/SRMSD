@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 import models.loginAuth;
 
+
 public class UserLogin extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
@@ -116,6 +117,7 @@ public class UserLogin extends JFrame implements ActionListener{
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_1_2.setBounds(250, 152, 254, 24);
 		panel.add(lblNewLabel_1_2);
+		setVisible(true);
 	}
 
 	@Override
@@ -130,7 +132,7 @@ public class UserLogin extends JFrame implements ActionListener{
 			if(authentication.loginSuccess())
 			{
 				dispose();
-				new SalesPerson_POS();
+				new SalesPerson_POS(username);
 			}
 			else
 			{
@@ -144,6 +146,5 @@ public class UserLogin extends JFrame implements ActionListener{
 			dispose();
 			new LoginMenu();
 		}
-	
 	}
 }
