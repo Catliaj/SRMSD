@@ -101,7 +101,6 @@ public class product
 				String productPrice = rs.getString("price");
 				String productQuantity = rs.getString("stock_quantity");
 				String brand = rs.getString("brand");
-
 				Object[] row = { productCategory, productName, brand,productPrice, productQuantity };
 				model.addRow(row);
 			}

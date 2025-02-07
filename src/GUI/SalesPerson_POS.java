@@ -6,33 +6,57 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.SwingConstants;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JTextArea;
 
-public class SalesPerson_POS extends JFrame {
+
+
+import javax.swing.JTextArea;
+import models.SalesPerson_POSBackend;
+import javax.swing.DefaultComboBoxModel;
+
+public class SalesPerson_POS extends JFrame implements ActionListener
+{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private final JPanel panel_3 = new JPanel();
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField;
+	private JTextField amountTextField;
+	private JTextField changeTextField;
+	private JTextField totalTextField;
+	private JTextField QuantityTextField;
+	private JButton salesButton ;
+	private JButton logoutButton;
+	private JButton AddButton;
+	private JComboBox CategoryComboBox;
+	private JComboBox ProductNameComboBox ;
+	private JButton payButton;
+	private JComboBox DiscountComboBox;
+	private JLabel name;
+	private JTextArea textArea;
 
 	/**
 	 * Launch the application.
@@ -41,7 +65,7 @@ public class SalesPerson_POS extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SalesPerson_POS frame = new SalesPerson_POS();
+					SalesPerson_POS frame = new SalesPerson_POS(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,8 +76,27 @@ public class SalesPerson_POS extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * 
 	 */
-	public SalesPerson_POS() {
+
+	SalesPerson_POSBackend pos = new SalesPerson_POSBackend();
+	// dont touch this!!!!!
+	private String getUsername;
+	private JTable table;
+	private JTextField priceTextField;
+	
+	public String getGetUsername() 
+	{
+		return getUsername;
+	}
+
+	public void setGetUsername(String getUsername) 
+	{
+		this.getUsername = getUsername;
+	}
+
+	public SalesPerson_POS(String UserName) 
+	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1291, 750);
 		contentPane = new JPanel();
@@ -95,7 +138,7 @@ public class SalesPerson_POS extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("WELCOME,");
 		lblNewLabel_2.setForeground(new Color(232, 216, 196));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_2.setBounds(51, 124, 172, 32);
+		lblNewLabel_2.setBounds(51, 106, 172, 32);
 		panel_3.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("______________");
@@ -104,39 +147,43 @@ public class SalesPerson_POS extends JFrame {
 		lblNewLabel_2_1_1.setBounds(12, 182, 211, 32);
 		panel_3.add(lblNewLabel_2_1_1);
 		
-		JButton btnNewButton = new JButton("POS");
-		btnNewButton.setBackground(new Color(109, 41, 50));
-		btnNewButton.setForeground(new Color(232, 216, 196));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton.setBounds(0, 294, 243, 63);
-		panel_3.add(btnNewButton);
+		JButton Pos = new JButton("POS");
+		Pos.setEnabled(false);
+		Pos.setBackground(new Color(109, 41, 50));
+		Pos.setForeground(new Color(232, 216, 196));
+		Pos.setFont(new Font("Tahoma", Font.BOLD, 20));
+		Pos.setBounds(0, 294, 243, 63);
+		panel_3.add(Pos);
 		
-		JButton btnProducts = new JButton("SALES");
-		btnProducts.setForeground(new Color(232, 216, 196));
-		btnProducts.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnProducts.setBackground(new Color(109, 41, 50));
-		btnProducts.setBounds(0, 367, 243, 63);
-		panel_3.add(btnProducts);
+	    salesButton = new JButton("SALES");
+		salesButton.setForeground(new Color(232, 216, 196));
+		salesButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+		salesButton.setBackground(new Color(109, 41, 50));
+		salesButton.setBounds(0, 367, 243, 63);
+		salesButton.addActionListener(this);
+		panel_3.add(salesButton);
 		
-		JButton btnNewButton_1_1_1 = new JButton("LOG OUT");
-		btnNewButton_1_1_1.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_1_1_1.setBackground(new Color(109, 41, 50));
-		btnNewButton_1_1_1.setBounds(0, 533, 243, 63);
-		panel_3.add(btnNewButton_1_1_1);
-		
-		JLabel lblNewLabel_2_1 = new JLabel("SALES PERSON");
-		lblNewLabel_2_1.setForeground(new Color(232, 216, 196));
-		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_2_1.setBounds(22, 159, 211, 32);
-		panel_3.add(lblNewLabel_2_1);
+	    logoutButton = new JButton("LOG OUT");
+		logoutButton.setForeground(new Color(232, 216, 196));
+		logoutButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+		logoutButton.setBackground(new Color(109, 41, 50));
+		logoutButton.setBounds(0, 533, 243, 63);
+		logoutButton.addActionListener(this);
+		panel_3.add(logoutButton);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("");
 		lblNewLabel_3_1.setBounds(0, 497, 280, 216);
 		panel_3.add(lblNewLabel_3_1);
 		lblNewLabel_3_1.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/design1.png")));
 		
+	    name = new JLabel("SALES PERSON");
+	    name.setBounds(22, 106, 211, 130);
+	    panel_3.add(name);
+	    name.setForeground(new Color(232, 216, 196));
+	    name.setFont(new Font("Tahoma", Font.BOLD, 25));
+		
 		JPanel panel_5_1_1 = new JPanel();
+		panel_5_1_1.setToolTipText("");
 		panel_5_1_1.setLayout(null);
 		panel_5_1_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_5_1_1.setBackground(new Color(142, 60, 71));
@@ -150,108 +197,93 @@ public class SalesPerson_POS extends JFrame {
 		panel_2.setBackground(new Color(107, 46, 53));
 		panel_2.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("ADD");
-		btnNewButton_1.setForeground(new Color(232, 216, 196));
-		btnNewButton_1.setBackground(new Color(82, 35, 41));
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton_1.setBounds(10, 10, 122, 35);
-		panel_2.add(btnNewButton_1);
+	    AddButton = new JButton("ADD");
+		AddButton.setForeground(new Color(232, 216, 196));
+		AddButton.setBackground(new Color(82, 35, 41));
+		AddButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		AddButton.setBounds(10, 10, 122, 35);
+		AddButton.addActionListener(this);
+		panel_2.add(AddButton);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBackground(new Color(232, 216, 196));
-		comboBox.setBounds(198, 36, 201, 36);
-		panel_5_1_1.add(comboBox);
+	    CategoryComboBox = new JComboBox();
+		CategoryComboBox.setBackground(new Color(232, 216, 196));
+		CategoryComboBox.setBounds(162, 20, 201, 36);
+		panel_5_1_1.add(CategoryComboBox);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBackground(new Color(232, 216, 196));
-		comboBox_1.setBounds(198, 97, 201, 36);
-		panel_5_1_1.add(comboBox_1);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setBackground(new Color(232, 216, 196));
-		spinner.setBounds(198, 156, 86, 36);
-		panel_5_1_1.add(spinner);
+	    ProductNameComboBox = new JComboBox();
+		ProductNameComboBox.setBackground(new Color(232, 216, 196));
+		ProductNameComboBox.setBounds(162, 66, 201, 36);
+		panel_5_1_1.add(ProductNameComboBox);
 		
 		JLabel lblNewLabel_3 = new JLabel("CATEGORY:");
 		lblNewLabel_3.setForeground(new Color(232, 216, 196));
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_3.setBounds(67, 41, 114, 24);
+		lblNewLabel_3.setBounds(67, 25, 114, 24);
 		panel_5_1_1.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_3_2 = new JLabel("PRODUCT NAME:");
 		lblNewLabel_3_2.setForeground(new Color(232, 216, 196));
 		lblNewLabel_3_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_3_2.setBounds(27, 104, 154, 24);
+		lblNewLabel_3_2.setBounds(27, 73, 154, 24);
 		panel_5_1_1.add(lblNewLabel_3_2);
 		
 		JLabel lblNewLabel_3_2_1 = new JLabel("QUANTITY:");
 		lblNewLabel_3_2_1.setForeground(new Color(232, 216, 196));
 		lblNewLabel_3_2_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_3_2_1.setBounds(69, 162, 154, 24);
+		lblNewLabel_3_2_1.setBounds(67, 171, 154, 24);
 		panel_5_1_1.add(lblNewLabel_3_2_1);
 		
-		JLabel lblNewLabel_3_2_1_1_1 = new JLabel("AMOUNT:");
-		lblNewLabel_3_2_1_1_1.setForeground(new Color(232, 216, 196));
-		lblNewLabel_3_2_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_3_2_1_1_1.setBounds(16, 531, 154, 24);
-		panel_5_1_1.add(lblNewLabel_3_2_1_1_1);
+		JLabel label = new JLabel("AMOUNT:");
+		label.setForeground(new Color(232, 216, 196));
+		label.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label.setBounds(52, 463, 154, 24);
+		panel_5_1_1.add(label);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBackground(new Color(232, 216, 196));
-		textField_1.setBounds(112, 528, 126, 36);
-		panel_5_1_1.add(textField_1);
+		amountTextField = new JTextField();
+		amountTextField.setColumns(10);
+		amountTextField.setBackground(new Color(232, 216, 196));
+		amountTextField.setBounds(148, 460, 126, 36);
+		panel_5_1_1.add(amountTextField);
 		
 		JLabel lblNewLabel_3_2_1_1_1_1 = new JLabel("CHANGE:");
 		lblNewLabel_3_2_1_1_1_1.setForeground(new Color(232, 216, 196));
 		lblNewLabel_3_2_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_3_2_1_1_1_1.setBounds(16, 589, 154, 24);
+		lblNewLabel_3_2_1_1_1_1.setBounds(52, 521, 154, 24);
 		panel_5_1_1.add(lblNewLabel_3_2_1_1_1_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBackground(new Color(232, 216, 196));
-		textField_2.setBounds(112, 582, 126, 36);
-		panel_5_1_1.add(textField_2);
+		changeTextField = new JTextField();
+		changeTextField.setEditable(false);
+		changeTextField.setColumns(10);
+		changeTextField.setBackground(new Color(232, 216, 196));
+		changeTextField.setBounds(148, 514, 126, 36);
+		panel_5_1_1.add(changeTextField);
 		
 		JPanel panel_2_1_1 = new JPanel();
 		panel_2_1_1.setLayout(null);
 		panel_2_1_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_2_1_1.setBackground(new Color(107, 46, 53));
-		panel_2_1_1.setBounds(257, 546, 142, 55);
+		panel_2_1_1.setBounds(136, 578, 142, 55);
 		panel_5_1_1.add(panel_2_1_1);
 		
-		JButton btnNewButton_1_1_2 = new JButton("PAY");
-		btnNewButton_1_1_2.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton_1_1_2.setBackground(new Color(82, 35, 41));
-		btnNewButton_1_1_2.setBounds(10, 10, 122, 35);
-		panel_2_1_1.add(btnNewButton_1_1_2);
-		
-		JPanel panel_2_1_2 = new JPanel();
-		panel_2_1_2.setLayout(null);
-		panel_2_1_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_2_1_2.setBackground(new Color(107, 46, 53));
-		panel_2_1_2.setBounds(263, 373, 142, 55);
-		panel_5_1_1.add(panel_2_1_2);
-		
-		JButton btnNewButton_1_1_3 = new JButton("TOTAL");
-		btnNewButton_1_1_3.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_1_3.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton_1_1_3.setBackground(new Color(82, 35, 41));
-		btnNewButton_1_1_3.setBounds(10, 10, 122, 35);
-		panel_2_1_2.add(btnNewButton_1_1_3);
+	    payButton = new JButton("PAY");
+		payButton.setForeground(new Color(232, 216, 196));
+		payButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		payButton.setBackground(new Color(82, 35, 41));
+		payButton.setBounds(10, 10, 122, 35);
+		payButton.addActionListener(this);
+		panel_2_1_1.add(payButton);
 		
 		JLabel lblNewLabel_3_2_1_1_1_2 = new JLabel("DISCOUNT:");
 		lblNewLabel_3_2_1_1_1_2.setForeground(new Color(232, 216, 196));
 		lblNewLabel_3_2_1_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_3_2_1_1_1_2.setBounds(16, 355, 154, 24);
+		lblNewLabel_3_2_1_1_1_2.setBounds(48, 331, 154, 24);
 		panel_5_1_1.add(lblNewLabel_3_2_1_1_1_2);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBackground(new Color(227, 207, 183));
-		comboBox_2.setBounds(118, 355, 126, 36);
-		panel_5_1_1.add(comboBox_2);
+	    DiscountComboBox = new JComboBox();
+	    DiscountComboBox.setModel(new DefaultComboBoxModel(new String[] {"--- Select a Discount--", "Senior Citizen Discount 20%", "Senior Citizen Discount 20%"}));
+		DiscountComboBox.setBackground(new Color(227, 207, 183));
+		DiscountComboBox.setBounds(150, 331, 126, 36);
+		panel_5_1_1.add(DiscountComboBox);
 		
 		JLabel lblNewLabel_2_1_1_1 = new JLabel("____________________________");
 		lblNewLabel_2_1_1_1.setForeground(new Color(232, 216, 196));
@@ -262,14 +294,34 @@ public class SalesPerson_POS extends JFrame {
 		JLabel lblNewLabel_3_2_1_1_1_3 = new JLabel("TOTAL:");
 		lblNewLabel_3_2_1_1_1_3.setForeground(new Color(232, 216, 196));
 		lblNewLabel_3_2_1_1_1_3.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_3_2_1_1_1_3.setBounds(43, 413, 154, 24);
+		lblNewLabel_3_2_1_1_1_3.setBounds(75, 389, 154, 24);
 		panel_5_1_1.add(lblNewLabel_3_2_1_1_1_3);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBackground(new Color(232, 216, 196));
-		textField.setBounds(118, 410, 126, 36);
-		panel_5_1_1.add(textField);
+		totalTextField = new JTextField();
+		totalTextField.setEditable(false);
+		totalTextField.setColumns(10);
+		totalTextField.setBackground(new Color(232, 216, 196));
+		totalTextField.setBounds(150, 386, 126, 36);
+		panel_5_1_1.add(totalTextField);
+		
+		QuantityTextField = new JTextField();
+		QuantityTextField.setBackground(new Color(232, 216, 196));
+		QuantityTextField.setBounds(160, 168, 72, 36);
+		panel_5_1_1.add(QuantityTextField);
+		QuantityTextField.setColumns(10);
+		
+		JLabel lblNewLabel_3_2_1_1 = new JLabel("PRICE:");
+		lblNewLabel_3_2_1_1.setForeground(new Color(232, 216, 196));
+		lblNewLabel_3_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_3_2_1_1.setBounds(99, 130, 154, 24);
+		panel_5_1_1.add(lblNewLabel_3_2_1_1);
+		
+		priceTextField = new JTextField();
+		priceTextField.setEditable(false);
+		priceTextField.setBackground(new Color(232, 216, 196));
+		priceTextField.setColumns(10);
+		priceTextField.setBounds(160, 125, 72, 36);
+		panel_5_1_1.add(priceTextField);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(142, 60, 71));
@@ -277,17 +329,316 @@ public class SalesPerson_POS extends JFrame {
 		panel_1.add(panel_4);
 		panel_4.setLayout(null);
 		
-		JTextArea textArea = new JTextArea();
+	    textArea = new JTextArea();
 		textArea.setFont(new Font("Courier New", Font.BOLD, 15));
 		textArea.setBackground(new Color(208, 208, 208));
-		textArea.setBounds(10, 10, 537, 651);
+		textArea.setBounds(10, 287, 537, 374);
+		textArea.append("\t \t#-----------RECIEPT-------------#"+"\n");
 		panel_4.add(textArea);
+		
+		
+		
+		
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Product", "Quantity", "Price", "Total", "Action"
+			}
+		));
+		
+		table.addMouseListener(new java.awt.event.MouseAdapter() {
+		    @Override
+		    public void mouseClicked(java.awt.event.MouseEvent evt) {
+		        int row = table.rowAtPoint(evt.getPoint());  // Get clicked row
+		        int col = table.columnAtPoint(evt.getPoint());  // Get clicked column
+
+		        if (col == 4) {  // Check if the "Delete" column is clicked
+		            String productName = (String) table.getValueAt(row, 0);  // Product Name
+		            double price = (double) table.getValueAt(row, 2);  // Price
+		            int quantity = (int) table.getValueAt(row, 1);  // Quantity
+		            double total = (double) table.getValueAt(row, 3);  // Total (Total = Price * Quantity)
+
+		            // Remove the row from JTable
+		            DefaultTableModel model = (DefaultTableModel) table.getModel();
+		            model.removeRow(row);  // Remove the selected row from the table
+
+		            // Get the current text from the text area
+		            String receiptText = textArea.getText();
+
+		            // Create the string for this product to remove
+		            String productText = String.format(
+		                " \t \t# Product: %s \t\t#\n" +
+		                " \t \t# Price: ₱%.2f\t\t\t#\n" +
+		                " \t \t# Quantity: %d\t\t\t#\n" +
+		                " \t \t# Total: ₱%.2f\t\t\t#\n" +
+		                " \t \t#-------------------------------#\n",
+		                productName, price, quantity, total);
+
+		            // Remove the corresponding product text from the receipt
+		            receiptText = receiptText.replace(productText, "");
+
+		            // Set the updated receipt text back into the text area
+		            textArea.setText(receiptText);
+		            updateTotal();
+		        }
+		    }
+		});
+
+
+		
+		DefaultTableModel model = new DefaultTableModel(
+			    new Object[][] {},
+			    new String[] { "Product", "Quantity", "Price", "Total", "Action" } // Add "Action" column
+			);
+		table.setModel(model);
+		table.setBounds(10, 10, 537, 267);
+		
+		panel_4.add(table);
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(10, 10, 537, 267);
+		panel_4.add(scrollPane);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/MainBackground.png")));
 		lblNewLabel.setBounds(0, 0, 1276, 713);
 		panel_1.add(lblNewLabel);
 		setLocationRelativeTo(null);
+		setGetUsername(UserName);
+		UpdateLabelName(UserName);
+		populateCategories();
+		CategoryComboBox.addActionListener(this);
+		ProductNameComboBox.addActionListener(this);
+		
+		
+
 		setVisible(true);
+		
+		
 	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		// TODO Auto-generated method stub
+		
+		if(e.getSource() == salesButton)
+		{
+			dispose();
+			new SalesPerson_Sales(getGetUsername());
+		}
+		else if(e.getSource() == logoutButton)
+		{
+			dispose();
+			new UserLogin();
+		}
+		else if(e.getSource() == CategoryComboBox)
+		{
+			String selectedCategory = (String) CategoryComboBox.getSelectedItem();
+		    if (selectedCategory != null) 
+		    {
+		        populateProducts(selectedCategory);
+		    }
+		}
+		else if(e.getSource() == ProductNameComboBox)
+		{
+			String selectedProduct = (String) ProductNameComboBox.getSelectedItem();
+		    if (selectedProduct != null) 
+		    {
+		        setProductPrice(selectedProduct);
+		    }
+		}
+		else if (e.getSource() == AddButton) 
+		{
+		    String product = (String) ProductNameComboBox.getSelectedItem();
+		    String category = (String) CategoryComboBox.getSelectedItem();
+		    int quantity = Integer.parseInt(QuantityTextField.getText());
+		    double price = Double.parseDouble(priceTextField.getText());
+		    double total = price * quantity;
+
+		    DefaultTableModel model = (DefaultTableModel) table.getModel();
+		    
+		    // ✅ Add row with "Delete" button
+		    model.addRow(new Object[] { product, quantity, price, total, "Delete" });
+		    addProductToTableAndReceipt(product, price, quantity, total);
+		    
+		    QuantityTextField.setText("");
+		    priceTextField.setText("");
+		}
+		else if(e.getSource() == payButton)
+		{
+			String getTotal = totalTextField.getText();
+			String getAmount =amountTextField.getText();
+			
+			double Total = Double.parseDouble(getTotal);
+			double Amount = Double.parseDouble(getAmount);
+			try
+			{
+				if(Amount >= Total)
+				{
+					double Change = Amount -= Total;
+					String ConvertText = String.valueOf(Change);
+					changeTextField.setText(ConvertText);
+					pos.saveOrderToDatabase(getGetUsername(), Total, Amount, Change, table);
+					generateReceiptPopup();
+					totalTextField.setText("");
+					amountTextField.setText("");
+					QuantityTextField.setText("");
+					priceTextField.setText("");
+					textArea.setText("");
+					changeTextField.setText("");
+					
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Insufficient Amount");
+				}
+			}
+			catch(NumberFormatException ex)
+			{
+				JOptionPane.showMessageDialog(this, "Please enter valid numeric values for total and amount." );
+				
+			}
+			
+		}
+
+	}
+	// other methods 
+	private void UpdateLabelName(String username)
+	{
+		String updatename = pos.getName(username);
+		if(updatename != null)
+		{
+			
+			name.setText("<html>" +updatename.replace("\n","<br>") + "</html>");
+		}
+		else
+		{
+			name.setText("User Not Found");
+		}
+				
+	}
+	
+	private void populateCategories() 
+	{
+	    CategoryComboBox.removeAllItems();
+	    List<String> categories = pos.getCategories();
+	    CategoryComboBox.addItem("---Select a Category---");
+	   
+	    for (String category : categories) 
+	    {
+	        CategoryComboBox.addItem(category);
+	    }
+	}
+	
+	private void populateProducts(String category) 
+	{
+	    ProductNameComboBox.removeAllItems();
+	    List<String> products = pos.getProductsByCategory(category);
+	    
+	    for (String product : products) 
+	    {
+	        
+	        ProductNameComboBox.addItem(product);
+	        
+	    }
+	}
+	
+	private void setProductPrice(String productName) 
+	{
+	    double price = pos.getProductPrice(productName);
+	    priceTextField.setText(String.valueOf(price));
+	    QuantityTextField.setText("1");
+	}
+	
+	public void updateTotal() {
+	    DefaultTableModel model = (DefaultTableModel) table.getModel();
+	    String discount = (String) DiscountComboBox.getSelectedItem();
+	    double grandTotal = 0;
+	    double discountRate = 0;
+
+	    // Calculate grand total from table data
+	    for (int i = 0; i < model.getRowCount(); i++) {
+	        grandTotal += (double) model.getValueAt(i, 3); // Column index 3 is "Total"
+	    }
+
+	    // Determine discount rate
+	    if ("Senior Citizen Discount 20%".equals(discount)) {
+	        discountRate = 0.20;
+	    } else if ("PWD Discount 15%".equals(discount)) {  // Example for PWD discount
+	        discountRate = 0.15;
+	    } 
+
+	    // Apply discount
+	    double discountAmount = grandTotal * discountRate;
+	    double totalAmount = grandTotal - discountAmount;
+
+	    // Format the total amount to two decimal places
+	    totalTextField.setText(String.format("%.2f", totalAmount));
+	}
+
+	
+	private void addProductToTableAndReceipt(String product, double price, int quantity, double total) {
+	    
+
+	    // Add to receipt in textArea
+	    String productText = String.format(
+	        " \t \t# Product: %s \t\t#\n" +
+	        " \t \t# Price: ₱%.2f\t\t\t#\n" +
+	        " \t \t# Quantity: %d\t\t\t#\n" +
+	        " \t \t# Total: ₱%.2f\t\t\t#\n" +
+	        " \t \t#-------------------------------#\n",
+	        product, price, quantity, total);
+
+	    textArea.append(productText);
+	    updateTotal();
+	}
+	
+	
+	// ito ang pagandahin mo ARA
+	public void generateReceiptPopup() {
+	    StringBuilder receiptText = new StringBuilder();
+	    
+	    // Start with the title of the receipt
+	    receiptText.append("\t \t#-----------RECEIPT-------------#\n");
+	    
+	    // Loop through the table and append product details
+	    DefaultTableModel model = (DefaultTableModel) table.getModel();
+	    for (int i = 0; i < model.getRowCount(); i++) {
+	        String productName = (String) model.getValueAt(i, 0);
+	        int quantity = (int) model.getValueAt(i, 1);
+	        double price = (double) model.getValueAt(i, 2);
+	        double total = (double) model.getValueAt(i, 3);
+	        
+	        receiptText.append(String.format(
+	            " \t \t# Product: %s \t\t#\n" +
+	            " \t \t# Price: ₱%.2f\t\t\t#\n" +
+	            " \t \t# Quantity: %d\t\t\t#\n" +
+	            " \t \t# Total: ₱%.2f\t\t\t#\n" +
+	            " \t \t#-------------------------------#\n", 
+	            productName, price, quantity, total
+	        ));
+	    }
+	    
+	    // Add the total at the bottom
+	    String totalAmount = totalTextField.getText();
+	    receiptText.append(String.format(
+	        " \t \t# TOTAL: ₱%s \t\t\t#\n", totalAmount
+	    ));
+	    
+	    receiptText.append("\t \t#-----------THANK YOU!-----------#");
+	    
+	    // Show the receipt in a pop-up dialog
+	    JOptionPane.showMessageDialog(this, receiptText.toString(), "Receipt", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	
+
+
+	
+	
+
 }
+

@@ -34,7 +34,7 @@ public class SalesPerson_Performance extends JFrame {
 	 * Create the frame.
 	 */
 	public SalesPerson_Performance() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 816, 543);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,7 +56,7 @@ public class SalesPerson_Performance extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(SalesPerson_Performance.class.getResource("/Resources/performance_backg.png")));
 		lblNewLabel.setBounds(0, 0, 802, 511);
 		panel.add(lblNewLabel);
-		
+		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 
