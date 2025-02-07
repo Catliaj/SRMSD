@@ -354,8 +354,8 @@ public class Admin_Register extends JFrame implements ActionListener
                 	middleName.setText(table.getValueAt(selectedRow, 1).toString());
                 	surName.setText(table.getValueAt(selectedRow, 2).toString());
                 	userName.setText(table.getValueAt(selectedRow, 3).toString());
-                	password.setText(table.getValueAt(selectedRow, 5).toString());
-                	comboBoxRole.setSelectedItem(table.getValueAt(selectedRow, 4).toString());
+                	password.setText(table.getValueAt(selectedRow, 4).toString());
+                	comboBoxRole.setSelectedItem(table.getValueAt(selectedRow, 5).toString());
                 }
             }
         });
@@ -428,7 +428,7 @@ public class Admin_Register extends JFrame implements ActionListener
 			int confirm = JOptionPane.showConfirmDialog(null, "Do you want to add this user?");
 			if (confirm == JOptionPane.YES_OPTION) 
 			{
-				user.addUser(FirstName, MiddleInitial, LastName, UserName, Role, Password);
+				user.addUser(FirstName, MiddleInitial, LastName, UserName, Password, Role);
 				user.loadUserTable(table);
 			}
 		}
@@ -443,7 +443,7 @@ public class Admin_Register extends JFrame implements ActionListener
 			int confirm = JOptionPane.showConfirmDialog(null, "Do you want to Update this user?");
 			if (confirm == JOptionPane.YES_OPTION) 
 			{
-				user.updateUser(FirstName, MiddleInitial, LastName, UserName, Role, Password);
+				user.updateUser(FirstName, MiddleInitial, LastName, UserName, Password, Role);
 				user.loadUserTable(table);
 			}
 		}

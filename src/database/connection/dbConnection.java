@@ -3,8 +3,6 @@ package database.connection;
 import java.sql.*;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
-
-
 public class dbConnection 
 {
 	private static Connection connection;

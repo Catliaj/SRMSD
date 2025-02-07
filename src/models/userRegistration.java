@@ -66,8 +66,8 @@ public class userRegistration
 			ps.setString(2, getMiddleInitial());
 			ps.setString(3, getLastName());
 			ps.setString(4, getUserName());
-			ps.setString(5, getRole());
-			ps.setString(6, getPassword());
+			ps.setString(5, getPassword());
+			ps.setString(6, getRole());
 			ps.executeUpdate();
 			JOptionPane.showMessageDialog(null, "User Updated Successfully ");
 		} 
@@ -116,7 +116,7 @@ public class userRegistration
 				String Password = rs.getString("Password");
 				String Role = rs.getString("Role");
 				
-				Object[] row = { FirstName, MiddleInitial, LastName, UserName, Role, Password };
+				Object[] row = { FirstName, MiddleInitial, LastName, UserName, Password, Role };
 				model.addRow(row);
 			}
 		} catch (Exception e) {

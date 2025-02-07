@@ -13,6 +13,10 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTextField;
@@ -25,15 +29,22 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JDateChooser;
-
-public class SalesPerson_Sales extends JFrame {
+import models.salesPerson_Sales;
+import models.SalesPerson_POSBackend;
+public class SalesPerson_Sales extends JFrame implements ActionListener 
+{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private final JPanel panel_3 = new JPanel();
 	private JTable table;
-	private JTextField textField;
-
+	private JTextField TotalRevenueTextField;
+	private JButton POSBtn;
+	private JButton MyPerformanceBtn;
+	private JButton LogoutBtn;
+	private JLabel name;
+	private String userName;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -41,7 +52,7 @@ public class SalesPerson_Sales extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SalesPerson_Sales frame = new SalesPerson_Sales();
+					SalesPerson_Sales frame = new SalesPerson_Sales(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +64,24 @@ public class SalesPerson_Sales extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SalesPerson_Sales() {
+	
+	SalesPerson_POSBackend pos = new SalesPerson_POSBackend();
+	
+	
+	public String getUserName() 
+	{
+		return userName;
+	}
+
+	public void setUserName(String userName) 
+	{
+		this.userName = userName;
+	}
+
+	public SalesPerson_Sales(String UserName) 
+	{
+		
+		setUserName(UserName);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1291, 750);
 		contentPane = new JPanel();
@@ -95,7 +123,7 @@ public class SalesPerson_Sales extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("WELCOME,");
 		lblNewLabel_2.setForeground(new Color(232, 216, 196));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_2.setBounds(51, 124, 172, 32);
+		lblNewLabel_2.setBounds(51, 104, 172, 32);
 		panel_3.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("______________");
@@ -104,32 +132,35 @@ public class SalesPerson_Sales extends JFrame {
 		lblNewLabel_2_1_1.setBounds(12, 182, 211, 32);
 		panel_3.add(lblNewLabel_2_1_1);
 		
-		JButton btnNewButton = new JButton("POS");
-		btnNewButton.setBackground(new Color(109, 41, 50));
-		btnNewButton.setForeground(new Color(232, 216, 196));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton.setBounds(0, 294, 243, 63);
-		panel_3.add(btnNewButton);
+	    POSBtn = new JButton("POS");
+		POSBtn.setBackground(new Color(109, 41, 50));
+		POSBtn.setForeground(new Color(232, 216, 196));
+		POSBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		POSBtn.setBounds(0, 294, 243, 63);
+		POSBtn.addActionListener(this);
+		panel_3.add(POSBtn);
 		
 		JButton btnProducts = new JButton("SALES");
+		btnProducts.setEnabled(false);
 		btnProducts.setForeground(new Color(232, 216, 196));
 		btnProducts.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnProducts.setBackground(new Color(109, 41, 50));
 		btnProducts.setBounds(0, 367, 243, 63);
 		panel_3.add(btnProducts);
 		
-		JButton btnNewButton_1_1_1 = new JButton("LOG OUT");
-		btnNewButton_1_1_1.setForeground(new Color(232, 216, 196));
-		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_1_1_1.setBackground(new Color(109, 41, 50));
-		btnNewButton_1_1_1.setBounds(0, 533, 243, 63);
-		panel_3.add(btnNewButton_1_1_1);
+	    LogoutBtn = new JButton("LOG OUT");
+		LogoutBtn.setForeground(new Color(232, 216, 196));
+		LogoutBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		LogoutBtn.setBackground(new Color(109, 41, 50));
+		LogoutBtn.setBounds(0, 533, 243, 63);
+		LogoutBtn.addActionListener(this);
+		panel_3.add(LogoutBtn);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("SALES PERSON");
-		lblNewLabel_2_1.setForeground(new Color(232, 216, 196));
-		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_2_1.setBounds(22, 159, 211, 32);
-		panel_3.add(lblNewLabel_2_1);
+	    name = new JLabel("SALES PERSON");
+		name.setForeground(new Color(232, 216, 196));
+		name.setFont(new Font("Tahoma", Font.BOLD, 25));
+		name.setBounds(12, 134, 211, 80);
+		panel_3.add(name);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("");
 		lblNewLabel_3_1.setBounds(0, 497, 280, 216);
@@ -148,22 +179,12 @@ public class SalesPerson_Sales extends JFrame {
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
+			new Object[][] {},
 			new String[] {
 				"Product", "Sold Quantity", "Sales Date", "Total Sales"
 			}
 		));
+	
 		scrollPane.setViewportView(table);
 		
 		JPanel panel_2 = new JPanel();
@@ -174,7 +195,7 @@ public class SalesPerson_Sales extends JFrame {
 		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon(SalesPerson_Sales.class.getResource("/Resources/people (1).png")));
+		lblNewLabel_4.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/design2.png")));
 		lblNewLabel_4.setBounds(129, -124, 62, 314);
 		panel_2.add(lblNewLabel_4);
 		
@@ -217,12 +238,15 @@ public class SalesPerson_Sales extends JFrame {
 		lblNewLabel_5.setBounds(59, 61, 189, 57);
 		panel_6.add(lblNewLabel_5);
 		
-		textField = new JTextField();
-		textField.setBackground(new Color(109, 46, 54));
-		textField.setBounds(59, 20, 165, 57);
-		panel_6.add(textField);
-		textField.setColumns(10);
+		TotalRevenueTextField = new JTextField();
+		TotalRevenueTextField.setText("0");
+		TotalRevenueTextField.setForeground(Color.WHITE);
+		TotalRevenueTextField.setFont(new Font("Tahoma", Font.BOLD, 20));
+		TotalRevenueTextField.setBackground(new Color(109, 46, 54));
+		TotalRevenueTextField.setBounds(59, 20, 165, 57);
 		
+		panel_6.add(TotalRevenueTextField);
+		TotalRevenueTextField.setColumns(10);
 		JPanel panel_5_1 = new JPanel();
 		panel_5_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_5_1.setBackground(new Color(142, 60, 71));
@@ -230,12 +254,13 @@ public class SalesPerson_Sales extends JFrame {
 		panel_1.add(panel_5_1);
 		panel_5_1.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("MY PERFORMANCE");
-		btnNewButton_1.setForeground(new Color(227, 207, 183));
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_1.setBackground(new Color(109, 46, 54));
-		btnNewButton_1.setBounds(10, 10, 475, 66);
-		panel_5_1.add(btnNewButton_1);
+	    MyPerformanceBtn = new JButton("MY PERFORMANCE");
+		MyPerformanceBtn.setForeground(new Color(227, 207, 183));
+		MyPerformanceBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		MyPerformanceBtn.setBackground(new Color(109, 46, 54));
+		MyPerformanceBtn.setBounds(10, 10, 475, 66);
+		MyPerformanceBtn.addActionListener(this);
+		panel_5_1.add(MyPerformanceBtn);
 		
 		JLabel lblNewLabel_2_1_1_1 = new JLabel("______________");
 		lblNewLabel_2_1_1_1.setForeground(new Color(232, 216, 196));
@@ -278,6 +303,60 @@ public class SalesPerson_Sales extends JFrame {
 		lblNewLabel.setBounds(0, 0, 1276, 713);
 		panel_1.add(lblNewLabel);
 		setLocationRelativeTo(null);
+		
+		
+		//Populate Table
+		salesPerson_Sales sales = new salesPerson_Sales(UserName);
+		List<String[]> salesData = sales.getTableData();
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		for (String[] row : salesData) 
+	    {
+			model.addRow(row);
+		}
+		double TotalRevenue = sales.getTotalSales();
+		TotalRevenueTextField.setText( " ₱ " + String.valueOf(TotalRevenue));
+		UpdateLabelName(UserName);
+		
 		setVisible(true);
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		// TODO Auto-generated method stub
+		if(e.getSource() == POSBtn)
+		{
+			dispose();
+			new SalesPerson_POS(getUserName());
+		}
+		else if(e.getSource() == LogoutBtn)
+		{
+			dispose();
+			new UserLogin();
+		}
+		else if(e.getSource() == MyPerformanceBtn)
+		{
+			new SalesPerson_Performance();
+		}
+		
+	}
+	
+	public void UpdateLabelName(String username)
+	{
+		String updatename = pos.getName(username);
+		if(updatename != null)
+		{
+			
+			name.setText("<html>" +updatename.replace("\n","<br>") + "</html>");
+		}
+		else
+		{
+			name.setText("User Not Found");
+		}
+				
+	}
+	
+	
+	
+
 }
