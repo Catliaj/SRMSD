@@ -19,6 +19,8 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.table.*;
 
+import database.connection.dbConnection;
+
 public class TopSelling_Popup extends JFrame {
 
 	private static final long serialVersionUID = 1L;
