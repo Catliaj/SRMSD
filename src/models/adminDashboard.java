@@ -310,8 +310,10 @@ public class adminDashboard {
 	
 	
 	//Most popular Item-------------------------------------------------------------------------------
+
 	// Most popular Item (All-time)
 	public String getMostBoughtItem() {
+
 	    String mostBoughtItem = "No data available";
 	    dbConnection db = new dbConnection();
 
@@ -355,6 +357,7 @@ public class adminDashboard {
 
 	        if (rs.next()) {
 	            lowStockProduct = rs.getString("Product_Name"); // Get the product with the lowest stock
+
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -363,7 +366,6 @@ public class adminDashboard {
 
 	    return lowStockProduct;
 	}
-
 	
 	
 	public DefaultTableModel getTopSellingProducts() {

@@ -155,7 +155,6 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		logoutBtn.addActionListener(this);
 		panel_3.add(logoutBtn);
 		
-		
 		//TOP SELLING PRODUCTS-------------------------------------------------------------------
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
@@ -419,7 +418,7 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		          DecimalFormat formatter = new DecimalFormat("#,##0.00");
 		          String formattedRevenue = "₱ " + formatter.format(totalRevenue);
 		          textField_1.setText(formattedRevenue);
-		            
+		          
 		          String mostBoughtItem = method.getMostBoughtItem(); // Get the most bought item
 		          textField.setText(mostBoughtItem);
 		          
