@@ -98,6 +98,7 @@ public class SalesPerson_POSBackend
         PreparedStatement itemStmt = null;
         PreparedStatement userStmt = null;
         PreparedStatement productStmt = null;
+        PreparedStatement updateProductStockStmt = null;
         
         
         try {
@@ -136,6 +137,9 @@ public class SalesPerson_POSBackend
             // Prepare statement for inserting into sales table
             String insertSalesQuery = "INSERT INTO sales (product_id, quantity_sold, sales_date, total_sales, user_id, order_id) VALUES (?, ?, ?, ?, ?, ?)";
             itemStmt = connection.prepareStatement(insertSalesQuery);
+            
+            String updateStockQuery = "UPDATE products SET Stock_Quantity = Stock_Quantity - ? WHERE product_id = ?";
+            updateProductStockStmt = connection.prepareStatement(updateStockQuery);
 
             java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
             // Get table model
@@ -171,10 +175,15 @@ public class SalesPerson_POSBackend
                 itemStmt.setInt(5, userId);
                 itemStmt.setInt(6, orderId);
                 itemStmt.addBatch();
+                
+                updateProductStockStmt.setInt(1, quantity);
+                updateProductStockStmt.setInt(2, productId);
+                updateProductStockStmt.addBatch();
             }
 
             // Execute batch insert for sales
             itemStmt.executeBatch();
+            updateProductStockStmt.executeBatch();
             JOptionPane.showMessageDialog(null, "Order saved successfully!");
 
         } catch (SQLException ex) {

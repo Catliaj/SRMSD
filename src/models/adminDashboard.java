@@ -9,6 +9,9 @@ import java.sql.*;
 import java.time.LocalDate; // Import for handling dates
 import java.util.Random;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
 
 import database.connection.dbConnection;
 
@@ -307,22 +310,22 @@ public class adminDashboard {
 	
 	
 	//Most popular Item-------------------------------------------------------------------------------
-	public String getMostBoughtItem(String selectedDate) {
+
+	// Most popular Item (All-time)
+	public String getMostBoughtItem() {
+
 	    String mostBoughtItem = "No data available";
 	    dbConnection db = new dbConnection();
 
 	    String query = "SELECT p.Product_Name " +
 	                   "FROM sales s " +
 	                   "JOIN products p ON s.Product_id = p.Product_id " +
-	                   "WHERE s.Sales_Date = ? " +
 	                   "GROUP BY p.Product_Name " +
 	                   "ORDER BY SUM(s.Quantity_Sold) DESC LIMIT 1";
-	    
-	    try (Connection conn = db.getConnection();
-	         PreparedStatement stmt = conn.prepareStatement(query)) {
 
-	        stmt.setString(1, selectedDate);
-	        ResultSet rs = stmt.executeQuery();
+	    try (Connection conn = db.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(query);
+	         ResultSet rs = stmt.executeQuery()) {
 
 	        if (rs.next()) {
 	            mostBoughtItem = rs.getString("Product_Name"); // Get the most sold product
@@ -337,27 +340,24 @@ public class adminDashboard {
 	
 	
 	//low stocks-------------------------------------------------------------------------------
-	public String getLowStockProduct(String selectedDate) {
-	    String lowStockProduct = "";
+	// Get the product with the lowest stock (if below 21)
+	public String getLowStockProduct() {
+	    String lowStockProduct = "Plenty Stocked";
 	    dbConnection db = new dbConnection();
 
-	    String query = "SELECT p.Product_Name " +
-	                   "FROM sales s " +
-	                   "JOIN products p ON s.Product_id = p.Product_id " +
-	                   "WHERE s.Sales_Date = ? " +
-	                   "GROUP BY p.Product_Name " +
-	                   "HAVING SUM(s.Quantity_Sold) >= 80 " +  // Only products sold 80+ times
-	                   "ORDER BY SUM(s.Quantity_Sold) DESC " +  // Order by quantity sold, descending
-	                   "LIMIT 1";  // Get the top product with the highest sales
-	    
-	    try (Connection conn = db.getConnection();
-	         PreparedStatement stmt = conn.prepareStatement(query)) {
+	    String query = "SELECT Product_Name " +
+	                   "FROM products " +
+	                   "WHERE Stock_Quantity < 21 " +
+	                   "ORDER BY Stock_Quantity ASC " + // Get the lowest stock first
+	                   "LIMIT 1";
 
-	        stmt.setString(1, selectedDate);
-	        ResultSet rs = stmt.executeQuery();
+	    try (Connection conn = db.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(query);
+	         ResultSet rs = stmt.executeQuery()) {
 
 	        if (rs.next()) {
-	            lowStockProduct = rs.getString("Product_Name"); // Product with high sales
+	            lowStockProduct = rs.getString("Product_Name"); // Get the product with the lowest stock
+
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -365,5 +365,60 @@ public class adminDashboard {
 	    }
 
 	    return lowStockProduct;
+	}
+	
+	
+	public DefaultTableModel getTopSellingProducts() {
+	    DefaultTableModel model = new DefaultTableModel(new String[]{"Rank", "Product Name", "Qty."}, 0);
+	    dbConnection db = new dbConnection();
+
+	    String query = "SELECT p.Product_Name, SUM(s.Quantity_Sold) AS TotalSold " +
+	                   "FROM sales s " +
+	                   "JOIN products p ON s.Product_id = p.Product_id " +
+	                   "GROUP BY p.Product_Name " +
+	                   "ORDER BY TotalSold DESC " +
+	                   "LIMIT 10"; // Limit to top 10 products
+
+	    try (Connection conn = db.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(query);
+	         ResultSet rs = stmt.executeQuery()) {
+
+	        int rank = 1;
+	        while (rs.next()) {
+	            model.addRow(new Object[]{rank++, rs.getString("Product_Name"), rs.getInt("TotalSold")});
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        JOptionPane.showMessageDialog(null, "Error fetching top-selling products: " + e.getMessage());
+	    }
+
+	    return model;
+	}
+	
+	
+	
+	public DefaultTableModel updateLowStockTable() {
+	    dbConnection db = new dbConnection();
+	    String query = "SELECT Product_Name, Stock_Quantity FROM products WHERE Stock_Quantity < 21 ORDER BY Stock_Quantity ASC";
+
+	    DefaultTableModel tableModel = new DefaultTableModel(
+	        new Object[]{"Rank", "Product Name", "Qty."}, 0
+	    );
+
+	    try (Connection conn = db.getConnection();
+	         PreparedStatement pst = conn.prepareStatement(query);
+	         ResultSet rs = pst.executeQuery()) {
+
+	        int rank = 1;
+	        while (rs.next()) {
+	            String productName = rs.getString("Product_Name");
+	            int stock = rs.getInt("Stock_Quantity");
+	            tableModel.addRow(new Object[]{rank++, productName, stock});
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return tableModel;
 	}
 }

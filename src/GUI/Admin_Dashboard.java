@@ -39,7 +39,6 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 	private JButton btnProducts;
 	private JButton RegisterBtn;
 	private JButton logoutBtn;
-	private JButton transactionsBtn;
 	
 
 	/**
@@ -155,15 +154,6 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		logoutBtn.setBounds(0, 587, 243, 63);
 		logoutBtn.addActionListener(this);
 		panel_3.add(logoutBtn);
-		
-	    transactionsBtn = new JButton("TRANSACTIONS");
-		transactionsBtn.addActionListener(this);
-		transactionsBtn.setForeground(new Color(232, 216, 196));
-		transactionsBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		transactionsBtn.setBackground(new Color(109, 41, 50));
-		transactionsBtn.setBounds(0, 473, 243, 63);
-		panel_3.add(transactionsBtn);
-		
 		
 		//TOP SELLING PRODUCTS-------------------------------------------------------------------
 		JPanel panel_2 = new JPanel();
@@ -283,7 +273,7 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		textField_2.setBackground(new Color(232, 216, 196));
 		textField_2.setColumns(10);
 		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_2.setFont(new Font("Tahoma", Font.BOLD, 20));
+		textField_2.setFont(new Font("Tahoma", Font.BOLD, 18));
 		textField_2.setForeground(new Color(142, 60, 71));
 		textField_2.setBounds(112, 26, 150, 64);
 		panel_4_1_1.add(textField_2);
@@ -299,6 +289,7 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		
 				LowStock_Popup topPopUpFrame = new LowStock_Popup(); // Open the Customers frame
 				topPopUpFrame.setVisible(true); // Set the Customers frame visible
 			}
@@ -427,12 +418,12 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		          DecimalFormat formatter = new DecimalFormat("#,##0.00");
 		          String formattedRevenue = "₱ " + formatter.format(totalRevenue);
 		          textField_1.setText(formattedRevenue);
-		            
-		          String mostBoughtItem = method.getMostBoughtItem(selectedDate); // Get the most bought item
+		          
+		          String mostBoughtItem = method.getMostBoughtItem(); // Get the most bought item
 		          textField.setText(mostBoughtItem);
 		          
 		       // Update Low Stock Product (sold 80 times or more)
-		            String lowStockProduct = method.getLowStockProduct(selectedDate); // Get the low stock product
+		            String lowStockProduct = method.getLowStockProduct(); // Get the low stock product
 		            if (!lowStockProduct.isEmpty()) {
 		                textField_2.setText(lowStockProduct); // Set in the textField_2 if a product has low stock
 		            } else {
@@ -447,10 +438,10 @@ public class Admin_Dashboard extends JFrame implements ActionListener
         String formattedRevenue = "₱ " + formatter.format(totalRevenue);
         textField_1.setText(formattedRevenue);
         
-        String mostBoughtItem = method.getMostBoughtItem(selectedDate); // Get the most bought item
+        String mostBoughtItem = method.getMostBoughtItem(); // Get the most bought item
         textField.setText(mostBoughtItem);
         
-        String lowStockProduct = method.getLowStockProduct(selectedDate); // Get the low stock product
+        String lowStockProduct = method.getLowStockProduct(); // Get the low stock product
         if (!lowStockProduct.isEmpty()) {
             textField_2.setText(lowStockProduct); // Set in the textField_2 if a product has low stock
         } else {
@@ -470,11 +461,6 @@ public class Admin_Dashboard extends JFrame implements ActionListener
 		{
 			dispose();
 			new Admin_Products();
-		}
-		else if(e.getSource() == transactionsBtn)
-		{
-			dispose();
-			new Admin_Transactions();
 		}
 		else if(e.getSource() == RegisterBtn)
 		{

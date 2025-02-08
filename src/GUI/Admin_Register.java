@@ -52,7 +52,6 @@ public class Admin_Register extends JFrame implements ActionListener
 	private JButton btnProducts;
 	private JButton register;
 	private JButton Logout;
-	private JButton Transactions;
 	private JButton addBtn;
 	private JButton UpdateBtn;
 	private JButton DeleteBtn;
@@ -140,7 +139,7 @@ public class Admin_Register extends JFrame implements ActionListener
 		DashboardBtn.setBackground(new Color(109, 41, 50));
 		DashboardBtn.setForeground(new Color(232, 216, 196));
 		DashboardBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		DashboardBtn.setBounds(0, 216, 243, 63);
+		DashboardBtn.setBounds(0, 225, 243, 63);
 		DashboardBtn.addActionListener(this);
 		panel_3.add(DashboardBtn);
 		
@@ -148,7 +147,7 @@ public class Admin_Register extends JFrame implements ActionListener
 		btnProducts.setForeground(new Color(232, 216, 196));
 		btnProducts.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnProducts.setBackground(new Color(109, 41, 50));
-		btnProducts.setBounds(0, 289, 243, 63);
+		btnProducts.setBounds(0, 298, 243, 63);
 		btnProducts.addActionListener(this);
 		panel_3.add(btnProducts);
 		
@@ -157,7 +156,7 @@ public class Admin_Register extends JFrame implements ActionListener
 		register.setForeground(new Color(232, 216, 196));
 		register.setFont(new Font("Tahoma", Font.BOLD, 20));
 		register.setBackground(new Color(109, 41, 50));
-		register.setBounds(0, 362, 243, 63);
+		register.setBounds(0, 371, 243, 63);
 		register.addActionListener(this);
 		panel_3.add(register);
 		
@@ -168,14 +167,6 @@ public class Admin_Register extends JFrame implements ActionListener
 		Logout.setBounds(0, 570, 243, 63);
 		Logout.addActionListener(this);
 		panel_3.add(Logout);
-		
-	    Transactions = new JButton("TRANSACTIONS");
-		Transactions.setForeground(new Color(232, 216, 196));
-		Transactions.setFont(new Font("Tahoma", Font.BOLD, 20));
-		Transactions.setBackground(new Color(109, 41, 50));
-		Transactions.setBounds(0, 435, 243, 63);
-		Transactions.addActionListener(this);
-		panel_3.add(Transactions);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("");
 		lblNewLabel_3_1.setBounds(0, 488, 280, 225);
@@ -340,7 +331,7 @@ public class Admin_Register extends JFrame implements ActionListener
 		table.setModel(new DefaultTableModel(
 			new Object[][] {},
 			new String[] {
-				"Username", "First Name", "Middle Name", "Surname", "Role", "Password"
+				"First Name", "Middle Name", "Surname", "Username", "Password", "Role"
 			}
 		));
 		
@@ -375,6 +366,16 @@ public class Admin_Register extends JFrame implements ActionListener
 		search.setBounds(10, 10, 282, 31);
 		panel_4_1.add(search);
 		
+		search.addKeyListener(new java.awt.event.KeyAdapter() {
+		    @Override
+		    public void keyPressed(java.awt.event.KeyEvent e) {
+		        if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+		            searchUsers(search.getText().toLowerCase());
+		        }
+		    }
+		});
+
+		
 		JLabel lblNewLabel_3_4 = new JLabel("SEARCH:");
 		lblNewLabel_3_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_3_4.setForeground(new Color(232, 216, 196));
@@ -406,11 +407,7 @@ public class Admin_Register extends JFrame implements ActionListener
 			dispose();
 			new Admin_Products();
 		}
-		else if(e.getSource() == Transactions)
-		{
-			dispose();
-			new Admin_Transactions();
-		}
+	
 		else if(e.getSource() == Logout)
 		{
 			dispose();
@@ -464,7 +461,7 @@ public class Admin_Register extends JFrame implements ActionListener
 		}
 		
 	}
-	/*
+	
 	  private void searchUsers(String searchQuery) {
 	        DefaultTableModel model = (DefaultTableModel) table.getModel();
 	        model.setRowCount(0); 
@@ -487,5 +484,5 @@ public class Admin_Register extends JFrame implements ActionListener
 	            }
 	        }
 	    }
-	 */
+	 
 }

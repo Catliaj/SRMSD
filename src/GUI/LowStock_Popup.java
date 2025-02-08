@@ -14,10 +14,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.table.*;
+
+import models.adminDashboard;
+
+
 
 public class LowStock_Popup extends JFrame {
 
@@ -45,6 +49,8 @@ public class LowStock_Popup extends JFrame {
 	 * Create the frame.
 	 */
 	public LowStock_Popup() {
+		adminDashboard method = new adminDashboard();
+
 		setForeground(new Color(0, 0, 0));
 		setTitle("IM Activity 1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -135,43 +141,31 @@ public class LowStock_Popup extends JFrame {
 		});
 		
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(18, 134, 391, 420);
-		panel_main.add(scrollPane);
-		
-		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.BOLD, 10));
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"1", null, null},
-				{"2", null, null},
-				{"3", null, null},
-				{"4", null, null},
-				{"5", null, null},
-				{"6", null, null},
-			},
-			new String[] {
-				"Rank", "Product Name", "Qty."
-			}
-		));
-		
-		table.setFillsViewportHeight(true); 
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS); // Ensure columns adjust within the table width
-		
-		table.setRowHeight(66);
-		
-		table.getColumnModel().getColumn(0).setPreferredWidth(50);  // Rank
-		table.getColumnModel().getColumn(1).setPreferredWidth(250); // Product Name
-		table.getColumnModel().getColumn(2).setPreferredWidth(50); // Qty.
-		
-		// Create a cell renderer that centers text
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		// Scroll Pane for Table
+	    JScrollPane scrollPane = new JScrollPane();
+	    scrollPane.setBounds(18, 134, 391, 420);
+	    panel_main.add(scrollPane);
 
-        // Apply the renderer to all columns
-        for (int i = 0; i < table.getColumnCount(); i++) {
-            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
+	    table = new JTable();
+	    table.setFont(new Font("Tahoma", Font.BOLD, 10));
+
+	    // Set model from adminDashboard
+	    table.setModel(method.updateLowStockTable());
+
+	    table.setFillsViewportHeight(true);
+	    table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+	    table.setRowHeight(66);
+
+	    table.getColumnModel().getColumn(0).setPreferredWidth(50);  // Rank
+	    table.getColumnModel().getColumn(1).setPreferredWidth(250); // Product Name
+	    table.getColumnModel().getColumn(2).setPreferredWidth(50);  // Qty.
+
+	    // Center align all columns
+	    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+	    centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+	    for (int i = 0; i < table.getColumnCount(); i++) {
+	        table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	    }
 		
 		scrollPane.setViewportView(table);
 		

@@ -68,6 +68,7 @@ public class userRegistration
 			ps.setString(4, getUserName());
 			ps.setString(5, getPassword());
 			ps.setString(6, getRole());
+			ps.setString(7, getUserName());
 			ps.executeUpdate();
 			JOptionPane.showMessageDialog(null, "User Updated Successfully ");
 		} 
