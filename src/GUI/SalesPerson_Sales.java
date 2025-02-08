@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
@@ -15,6 +16,10 @@ import javax.swing.border.SoftBevelBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -29,6 +34,7 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JDateChooser;
+import java.text.DecimalFormat;
 import models.salesPerson_Sales;
 import models.SalesPerson_POSBackend;
 public class SalesPerson_Sales extends JFrame implements ActionListener 
@@ -159,7 +165,7 @@ public class SalesPerson_Sales extends JFrame implements ActionListener
 	    name = new JLabel("SALES PERSON");
 		name.setForeground(new Color(232, 216, 196));
 		name.setFont(new Font("Tahoma", Font.BOLD, 25));
-		name.setBounds(12, 134, 211, 80);
+		name.setBounds(22, 124, 211, 80);
 		panel_3.add(name);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("");
@@ -196,7 +202,7 @@ public class SalesPerson_Sales extends JFrame implements ActionListener
 		
 		JLabel lblNewLabel_4 = new JLabel("");
 		lblNewLabel_4.setIcon(new ImageIcon(Admin_Dashboard.class.getResource("/Resources/design2.png")));
-		lblNewLabel_4.setBounds(129, -124, 62, 314);
+		lblNewLabel_4.setBounds(142, -124, 62, 314);
 		panel_2.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_3 = new JLabel("STARTING DATE:");
@@ -218,6 +224,30 @@ public class SalesPerson_Sales extends JFrame implements ActionListener
 		JDateChooser dateChooser_1 = new JDateChooser();
 		dateChooser_1.setBounds(641, 13, 183, 40);
 		panel_2.add(dateChooser_1);
+		
+		// Add KeyListener to detect Enter key press
+		dateChooser.getDateEditor().getUiComponent().addKeyListener(new java.awt.event.KeyAdapter() {
+		    @Override
+		    public void keyPressed(java.awt.event.KeyEvent e) {
+		        if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+		            searchSalesByDate(dateChooser, dateChooser_1);
+		        }
+		    }
+		});
+
+		dateChooser_1.getDateEditor().getUiComponent().addKeyListener(new java.awt.event.KeyAdapter() {
+		    @Override
+		    public void keyPressed(java.awt.event.KeyEvent e) {
+		        if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+		            searchSalesByDate(dateChooser, dateChooser_1);
+		        }
+		    }
+		});
+
+		JLabel lblNewLabel_6 = new JLabel("");
+		lblNewLabel_6.setIcon(new ImageIcon(SalesPerson_Sales.class.getResource("/Resources/people (1).png")));
+		lblNewLabel_6.setBounds(121, 4, 62, 49);
+		panel_2.add(lblNewLabel_6);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -244,6 +274,10 @@ public class SalesPerson_Sales extends JFrame implements ActionListener
 		TotalRevenueTextField.setFont(new Font("Tahoma", Font.BOLD, 20));
 		TotalRevenueTextField.setBackground(new Color(109, 46, 54));
 		TotalRevenueTextField.setBounds(59, 20, 165, 57);
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
+        
+        
+        
 		
 		panel_6.add(TotalRevenueTextField);
 		TotalRevenueTextField.setColumns(10);
@@ -315,6 +349,8 @@ public class SalesPerson_Sales extends JFrame implements ActionListener
 		}
 		double TotalRevenue = sales.getTotalSales();
 		TotalRevenueTextField.setText( " ₱ " + String.valueOf(TotalRevenue));
+		String formattedRevenue = "₱ " + formatter.format(TotalRevenue);
+		TotalRevenueTextField.setText(formattedRevenue);
 		UpdateLabelName(UserName);
 		
 		setVisible(true);
@@ -356,7 +392,46 @@ public class SalesPerson_Sales extends JFrame implements ActionListener
 				
 	}
 	
-	
-	
+	private void searchSalesByDate(JDateChooser startDateChooser, JDateChooser endDateChooser) {
+	    Date startDate = startDateChooser.getDate();
+	    Date endDate = endDateChooser.getDate();
+
+	    if (startDate == null || endDate == null) {
+	        JOptionPane.showMessageDialog(null, "Please select both start and end dates.");
+	        return;
+	    }
+
+	    LocalDate startLocalDate = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	    LocalDate endLocalDate = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+	    if (endLocalDate.isBefore(startLocalDate)) {
+	        JOptionPane.showMessageDialog(null, "End date must be after the start date.");
+	        return;
+	    }
+
+	    // Retrieve all sales data
+	    salesPerson_Sales sales = new salesPerson_Sales(userName);
+	    List<String[]> salesData = sales.getTableData();
+
+	    double totalRevenue = 0;
+	    DefaultTableModel model = (DefaultTableModel) table.getModel();
+	    model.setRowCount(0); // Clear table before adding filtered data
+
+	    for (String[] row : salesData) {
+	        try {
+	            LocalDate salesDate = LocalDate.parse(row[2], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	            if ((salesDate.isAfter(startLocalDate) || salesDate.isEqual(startLocalDate)) &&
+	                (salesDate.isBefore(endLocalDate) || salesDate.isEqual(endLocalDate))) {
+	                model.addRow(row); // Add row if within date range
+	                totalRevenue += Double.parseDouble(row[3]); // Add revenue
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    // Update revenue field
+	    TotalRevenueTextField.setText(" ₱ " + totalRevenue);
+	}
 
 }

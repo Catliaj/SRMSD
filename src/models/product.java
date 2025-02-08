@@ -110,6 +110,33 @@ public class product
 		}
 	}
 	
+	public java.util.List<String[]> getProductData() {
+	    java.util.List<String[]> productList = new java.util.ArrayList<>();
+	    
+	    try {
+	        connection = db.getConnection();
+	        PreparedStatement ps = connection.prepareStatement("SELECT * FROM products");
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            String productCategory = rs.getString("category");
+	            String productName = rs.getString("product_name");
+	            String brand = rs.getString("brand");
+	            String productPrice = rs.getString("price");
+	            String productQuantity = rs.getString("stock_quantity");
+
+	            String[] row = { productCategory, productName, brand, productPrice, productQuantity };
+	            productList.add(row);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        JOptionPane.showMessageDialog(null, "Error retrieving product data: " + e.getMessage());
+	    }
+
+	    return productList;
+	}
+
+	
 	
 	
 	

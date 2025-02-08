@@ -50,7 +50,6 @@ public class Admin_Products extends JFrame implements ActionListener{
 	private JButton btnProducts;
 	private JButton registerBtn;
 	private JButton LogoutBtn;
-	private JButton transactionBtn;
 	/**
 	 * Launch the application.
 	 */
@@ -133,7 +132,7 @@ public class Admin_Products extends JFrame implements ActionListener{
 		DashboardBtn.setBackground(new Color(109, 41, 50));
 		DashboardBtn.setForeground(new Color(232, 216, 196));
 		DashboardBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		DashboardBtn.setBounds(0, 254, 243, 63);
+		DashboardBtn.setBounds(0, 265, 243, 63);
 		DashboardBtn.addActionListener(this);
 		panel_3.add(DashboardBtn);
 		
@@ -142,7 +141,7 @@ public class Admin_Products extends JFrame implements ActionListener{
 		btnProducts.setForeground(new Color(232, 216, 196));
 		btnProducts.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnProducts.setBackground(new Color(109, 41, 50));
-		btnProducts.setBounds(0, 327, 243, 63);
+		btnProducts.setBounds(0, 338, 243, 63);
 		btnProducts.addActionListener(this);
 		panel_3.add(btnProducts);
 		
@@ -150,7 +149,7 @@ public class Admin_Products extends JFrame implements ActionListener{
 		registerBtn.setForeground(new Color(232, 216, 196));
 		registerBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
 		registerBtn.setBackground(new Color(109, 41, 50));
-		registerBtn.setBounds(0, 400, 243, 63);
+		registerBtn.setBounds(0, 411, 243, 63);
 		registerBtn.addActionListener(this);
 		panel_3.add(registerBtn);
 		
@@ -161,13 +160,6 @@ public class Admin_Products extends JFrame implements ActionListener{
 		LogoutBtn.setBounds(0, 596, 243, 63);
 		LogoutBtn.addActionListener(this);
 		panel_3.add(LogoutBtn);
-		
-	    transactionBtn = new JButton("TRANSACTIONS");
-		transactionBtn.setForeground(new Color(232, 216, 196));
-		transactionBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		transactionBtn.setBackground(new Color(109, 41, 50));
-		transactionBtn.setBounds(0, 473, 243, 63);
-		panel_3.add(transactionBtn);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("");
 		lblNewLabel_3_1.setBounds(-23, 412, 280, 339);
@@ -347,6 +339,18 @@ public class Admin_Products extends JFrame implements ActionListener{
 		panel_4.add(search);
 		search.setColumns(10);
 		
+		// Add KeyListener to detect Enter key press
+		search.addKeyListener(new java.awt.event.KeyAdapter() {
+		    @Override
+		    public void keyPressed(java.awt.event.KeyEvent e) {
+		        if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+		            searchProducts(search.getText().toLowerCase());
+		        }
+		    }
+		});
+
+
+		
 		JLabel lblNewLabel_3_4 = new JLabel("SEARCH:");
 		lblNewLabel_3_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_3_4.setForeground(new Color(232, 216, 196));
@@ -383,11 +387,7 @@ public class Admin_Products extends JFrame implements ActionListener{
 			dispose();
 			new Admin_Dashboard();
 		}
-		else if(e.getSource() ==  transactionBtn)
-		{
-			dispose();
-			new Admin_Transactions();
-		}
+		
 		else if(e.getSource() == registerBtn)
 		{
 			
@@ -441,8 +441,30 @@ public class Admin_Products extends JFrame implements ActionListener{
 		}
 		else if(e.getSource() == search)
 		{
-			
+					
 		}
 		
 	}
+	
+	private void searchProducts(String searchQuery) {
+	    DefaultTableModel model = (DefaultTableModel) table.getModel();
+	    model.setRowCount(0); // Clear table before adding filtered data
+
+	    // Retrieve all products from the database
+	    java.util.List<String[]> productData = product.getProductData(); 
+
+	    // Loop through the product list and filter based on the search query
+	    for (String[] row : productData) {
+	        String category = row[0].toLowerCase();
+	        String productName = row[1].toLowerCase();
+	        String brand = row[2].toLowerCase();
+
+	        // If the search matches category, product name, or brand, add the row
+	        if (category.contains(searchQuery) || productName.contains(searchQuery) || brand.contains(searchQuery)) {
+	            model.addRow(row);
+	        }
+	    }
+	}
+
+
 }

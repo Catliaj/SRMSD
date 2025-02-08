@@ -333,7 +333,7 @@ public class SalesPerson_POS extends JFrame implements ActionListener
 		textArea.setFont(new Font("Courier New", Font.BOLD, 15));
 		textArea.setBackground(new Color(208, 208, 208));
 		textArea.setBounds(10, 287, 537, 374);
-		textArea.append("\t \t#-----------RECIEPT-------------#"+"\n");
+		textArea.append("\t \t============RECEIPT============"+"\n");
 		panel_4.add(textArea);
 		
 		
@@ -370,12 +370,12 @@ public class SalesPerson_POS extends JFrame implements ActionListener
 
 		            // Create the string for this product to remove
 		            String productText = String.format(
-		                " \t \t# Product: %s \t\t#\n" +
-		                " \t \t# Price: ₱%.2f\t\t\t#\n" +
-		                " \t \t# Quantity: %d\t\t\t#\n" +
-		                " \t \t# Total: ₱%.2f\t\t\t#\n" +
-		                " \t \t#-------------------------------#\n",
-		                productName, price, quantity, total);
+		        	        " \t \t Product: %s \t\t\n" +
+		        	        " \t \t Price: ₱%.2f\t\t\t\n" +
+		        	        " \t \t Quantity: %d\t\t\t\n" +
+		        	        " \t \t Total: ₱%.2f\t\t\t\n" +
+		        	        " \t \t-------------------------------\n",
+		        	        productName, price, quantity, total);
 
 		            // Remove the corresponding product text from the receipt
 		            receiptText = receiptText.replace(productText, "");
@@ -489,7 +489,9 @@ public class SalesPerson_POS extends JFrame implements ActionListener
 					priceTextField.setText("");
 					textArea.setText("");
 					changeTextField.setText("");
-					
+					DefaultTableModel model = (DefaultTableModel) table.getModel();
+					model.setRowCount(0);
+							
 				}
 				else
 				{
@@ -585,11 +587,11 @@ public class SalesPerson_POS extends JFrame implements ActionListener
 
 	    // Add to receipt in textArea
 	    String productText = String.format(
-	        " \t \t# Product: %s \t\t#\n" +
-	        " \t \t# Price: ₱%.2f\t\t\t#\n" +
-	        " \t \t# Quantity: %d\t\t\t#\n" +
-	        " \t \t# Total: ₱%.2f\t\t\t#\n" +
-	        " \t \t#-------------------------------#\n",
+	        " \t \t Product: %s \t\t\n" +
+	        " \t \t Price: ₱%.2f\t\t\t\n" +
+	        " \t \t Quantity: %d\t\t\t\n" +
+	        " \t \t Total: ₱%.2f\t\t\t\n" +
+	        " \t \t-------------------------------\n",
 	        product, price, quantity, total);
 
 	    textArea.append(productText);
@@ -602,7 +604,7 @@ public class SalesPerson_POS extends JFrame implements ActionListener
 	    StringBuilder receiptText = new StringBuilder();
 	    
 	    // Start with the title of the receipt
-	    receiptText.append("\t \t#-----------RECEIPT-------------#\n");
+	    receiptText.append("\t \t============RECEIPT============\n");
 	    
 	    // Loop through the table and append product details
 	    DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -613,32 +615,35 @@ public class SalesPerson_POS extends JFrame implements ActionListener
 	        double total = (double) model.getValueAt(i, 3);
 	        
 	        receiptText.append(String.format(
-	            " \t \t# Product: %s \t\t#\n" +
-	            " \t \t# Price: ₱%.2f\t\t\t#\n" +
-	            " \t \t# Quantity: %d\t\t\t#\n" +
-	            " \t \t# Total: ₱%.2f\t\t\t#\n" +
-	            " \t \t#-------------------------------#\n", 
+	            " \t \tProduct:                                      %s \t\t\n" +
+	            " \t \tPrice:                                           ₱%s\t\t\t\n" +
+	            " \t \tQuantity:                                        %d\t\t\t\n" +
+	            " \t \tSubTotal:                                  ₱%s\t\t\t\n" +
+	            " \t \t-------------------------------------------------------\n", 
 	            productName, price, quantity, total
 	        ));
 	    }
 	    
 	    // Add the total at the bottom
 	    String totalAmount = totalTextField.getText();
+	    String Amountpaid = amountTextField.getText();
+	    String Change = changeTextField.getText();
+	    
 	    receiptText.append(String.format(
-	        " \t \t# TOTAL: ₱%s \t\t\t#\n", totalAmount
+	        " \t TOTAL:                                     ₱%s\n\n" +
+	        " \t AMOUNT PAID:                            ₱%s\n\n" +
+	        " \t CHANGE:                                      ₱%s\n",
+	        totalAmount, Amountpaid, Change
 	    ));
 	    
-	    receiptText.append("\t \t#-----------THANK YOU!-----------#");
+	    receiptText.append(String.format(
+	    		"\t \t===============================\n"+
+	    		"\t \t                     THANK YOU!\n"+
+	    		"\t \t===============================\n"));
 	    
 	    // Show the receipt in a pop-up dialog
 	    JOptionPane.showMessageDialog(this, receiptText.toString(), "Receipt", JOptionPane.INFORMATION_MESSAGE);
 	}
-
-	
-
-
-	
-	
 
 }
 
