@@ -454,6 +454,11 @@ public class Admin_Transactions extends JFrame implements ActionListener
 			dispose();
 			new AdminLogin();
 		}
+		else if(e.getSource() == register)
+		{
+			dispose();
+			new Admin_Register();
+		}
 		// Register ACtion Listerner
 		else if(e.getSource() == UpdateBtn)
 		{
